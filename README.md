@@ -192,6 +192,7 @@ MVPリリース時
 ### 画面遷移図
 Figma：https://www.figma.com/design/L2BzMTbrb7J4uoxFcSPnaG/precut?node-id=0-1&p=f&m=draw
 
+
 ### READMEに記載した機能
 - [⚪︎] ユーザー登録機能
 - [⚪︎] ログイン機能
