@@ -228,4 +228,4 @@ Figma：https://www.figma.com/design/L2BzMTbrb7J4uoxFcSPnaG/precut?node-id=0-1&p
 - [⚪︎] 作り込みはある程度完了している（Figmaを見て画面の作成ができる状態にある）
 
 ###ER図のリンク
-https://dbdiagram.io/d/68be5e9261a46d388ee54ab6
+https://dbdiagram.io/d/68ba6e7f61a46d388e91a1e9
