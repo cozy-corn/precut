@@ -1,27 +1,59 @@
-<!-- 画面下部に固定するフッター -->
-<div class="dock dock-md">
-  <button>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search">
-      <path d="m21 21-4.34-4.34"/>
-      <circle cx="11" cy="11" r="8"/>
-    </svg>
-    <span class="dock-label">検索</span>
-  </button>
+<header class="bg-white shadow">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- ロゴまたはサイト名 -->
+    <a href="/" class="text-2xl font-bold text-gray-800">
+      <span class="text-sky-500">
+        <!-- SVGロゴの例 -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+        </svg>
+      </span>
+      Your App
+    </a>
 
-  <button>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M8 12h8"/>
-      <path d="M12 8v8"/>
-    </svg>
-    <span class="dock-label">新規投稿</span>
-  </button>
+    <!-- PC用ナビゲーション -->
+    <nav class="hidden md:flex items-center space-x-4">
+      <% if user_signed_in? %>
+        <!-- ログイン済みの場合 -->
+        <%= link_to "プロフィール編集", edit_user_registration_path, class: "text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors duration-200" %>
+        <%= link_to "ログアウト", destroy_user_session_path, data: { "turbo-method": :delete }, class: "bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-colors duration-200" %>
+      <% else %>
+        <!-- 未ログインの場合 -->
+        <%= link_to "新規登録", new_user_registration_path, class: "text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors duration-200" %>
+        <%= link_to "ログイン", new_user_session_path, class: "bg-sky-500 text-white px-3 py-2 rounded-md hover:bg-sky-600 transition-colors duration-200" %>
+      <% end %>
+    </nav>
 
-  <button>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round">
-      <circle cx="12" cy="8" r="5"/>
-      <path d="M20 21a8 8 0 0 0-16 0"/>
-    </svg>
-    <span class="dock-label">マイページ</span>
-  </button>
-</div>
+    <!-- モバイル用ハンバーガーメニュー（MDサイズ以下で表示） -->
+    <div class="md:hidden">
+      <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- モバイル用メニュー（JSで表示切り替え） -->
+  <div id="mobile-menu" class="hidden md:hidden">
+    <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+      <% if user_signed_in? %>
+        <!-- ログイン済みの場合 -->
+        <%= link_to "プロフィール編集", edit_user_registration_path, class: "block text-gray-600 hover:text-gray-900 py-2 transition-colors duration-200" %>
+        <%= link_to "ログアウト", destroy_user_session_path, data: { "turbo-method": :delete }, class: "block bg-red-500 text-white py-2 px-3 rounded-md text-center hover:bg-red-600 transition-colors duration-200" %>
+      <% else %>
+        <!-- 未ログインの場合 -->
+        <%= link_to "新規登録", new_user_registration_path, class: "block text-gray-600 hover:text-gray-900 py-2 transition-colors duration-200" %>
+        <%= link_to "ログイン", new_user_session_path, class: "block bg-sky-500 text-white py-2 px-3 rounded-md text-center hover:bg-sky-600 transition-colors duration-200" %>
+      <% end %>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // JavaScriptでハンバーガーメニューの表示を切り替えます
+  document.getElementById('mobile-menu-button').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
