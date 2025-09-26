@@ -1,19 +1,23 @@
+   <!-- ログイン画面 -->
 <script src="https://cdn.tailwindcss.com"></script>
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
+<div class="max-w-md mx-auto bg-gray-100">
+  <!-- 全体を中央寄せにするためのコンテナ -->
   <div class="flex flex-col items-center">
+    <!-- ログインフォームのカードの様なフレームコンテナ -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-96 max-w-sm">
       <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">ログイン画面</h1>
+      <!-- フォーム全体を囲むコンテナ(縦方向の余白（16px相当）を自動で追加) -->
       <div class="flex flex-col space-y-4">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="relative">
-            <%= f.email_field :email, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: "電話番号、ユーザ名、Eメール" %>
+            <%= f.email_field :email, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: "Eメール" %>
           </div>
 
           <div class="relative">
             <%= f.password_field :password, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: "パスワード" %>
           </div>
 
-          <%= f.submit "ログイン", class: "w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-blue-700 transition-colors duration-200" %>
+          <%= f.submit "ログイン", class: "w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-blue-700 transition-colors duration-200" %>
         <% end %>
 
         <% if notice %>
@@ -23,15 +27,16 @@
         <% end %>
 
         <div class="mt-4 text-center">
-          <%= link_to "パスワードを忘れた方はこちら(準備中)", "#", class: "text-blue-600 hover:underline" %>
+          <%= link_to "パスワードを忘れた方はこちら(準備中)", "#", class: "text-blue-500 hover:underline" %>
         </div>
       </div>
     </div>
     <div class="bg-white p-4 rounded-lg shadow-lg w-96 max-w-sm mt-4 text-center">
       <p class="text-sm text-gray-600">
         アカウントを持っていない？
-        <%= link_to "新規登録", new_user_registration_path, class: "text-blue-600 hover:underline" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "text-blue-500 hover:underline" %>
       </p>
     </div>
   </div>
 </div>
+</html>
