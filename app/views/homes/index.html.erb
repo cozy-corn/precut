@@ -1,71 +1,47 @@
-<!-- app/views/home/index.html.erb -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- ページ全体のコンテナ -->
-<div class="min-h-screen bg-gray-50 flex flex-col items-center">
+<html class="h-full w-full">
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full w-full bg-gray-50 flex flex-col">
 
-  <!-- ヘッダー部分 -->
-  <header class="w-full bg-white shadow">
-    <div class="max-w-4xl mx-auto flex justify-between items-center p-4">
-      <!-- 左側：サービスロゴ（クリックするとTOPに戻る） -->
-      <a href="/" class="text-xl font-bold text-purple-600">precut</a>
-
-      <!-- 右側：ログインボタン -->
-      <div>
-        <!-- MVPではユーザー用ログインだけ用意 -->
-        <%= link_to "ログイン", new_user_session_path, 
-              class: "px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600" %>
-      </div>
-    </div>
-  </header>
-
-  <!-- メイン部分 -->
-  <main class="flex flex-col items-center mt-12 px-4 text-center">
-    <!-- キャッチコピー -->
-    <h1 class="text-2xl font-bold mb-2">来店前に"なりたい"を共有できる</h1>
+  <main class="flex-1 flex flex-col items-center mt-12 px-4 text-center">
+    <h1 class="text-3xl font-bold mb-2">来店前に"なりたい"を共有できる</h1>
     <p class="text-gray-600 mb-8">美容室のための事前カウンセリングWebアプリ</p>
 
-    <!-- サービス特徴（アイコン＋説明） -->
-    <div class="space-y-4 w-full max-w-md">
-      <!-- 特徴1 -->
-      <div class="flex items-start bg-white p-4 rounded shadow">
-        <!-- アイコン（Heroiconsなどに置き換え可） -->
-        <div class="text-purple-500 mr-3">💬</div>
+    <div class="grid md:grid-cols-3 gap-4 w-full px-4 md:px-0">
+      <div class="flex items-start bg-white p-6 rounded-xl shadow">
+        <div class="text-purple-500 mr-3 text-4xl">💬</div>
         <p class="text-left">
-          <span class="font-semibold">チャット形式で簡単入力</span><br>
+          <span class="font-semibold text-xl">チャット形式で簡単入力</span><br>
           会話するように気軽に要望を伝えられます
         </p>
       </div>
 
-      <!-- 特徴2 -->
-      <div class="flex items-start bg-white p-4 rounded shadow">
-        <div class="text-yellow-500 mr-3">⏱</div>
+      <div class="flex items-start bg-white p-6 rounded-xl shadow">
+        <div class="text-yellow-500 mr-3 text-4xl">⏱</div>
         <p class="text-left">
-          <span class="font-semibold">事前共有で時短カウンセリング</span><br>
+          <span class="font-semibold text-xl">事前共有で時短カウンセリング</span><br>
           来店前に要望を共有して当日をスムーズに
         </p>
       </div>
 
-      <!-- 特徴3 -->
-      <div class="flex items-start bg-white p-4 rounded shadow">
-        <div class="text-green-500 mr-3">🔗</div>
+      <div class="flex items-start bg-white p-6 rounded-xl shadow">
+        <div class="text-green-500 mr-3 text-4xl">🔗</div>
         <p class="text-left">
-          <span class="font-semibold">QRコードで即座に共有</span><br>
+          <span class="font-semibold text-xl">QRコードで即座に共有</span><br>
           美容師さんにワンタップで情報を送信
         </p>
       </div>
     </div>
 
-    <!-- CTAボタン群 -->
-    <div class="mt-8 space-y-4 w-full max-w-md">
-      <!-- カウンセリング開始ボタン -->
-      <%= link_to "カウンセリングを始める", new_user_session_path,
+    <div class="mt-8 space-y-4 w-full max-w-md mx-auto">
+      <%= link_to "カウンセリングを始める", new_user_registration_path,
             class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
 
-      <!-- 美容師専用ページ（MVPでは未実装なので仮リンクにしておく） -->
       <%= link_to "美容師専用ページ", "#",
             class: "block w-full text-center bg-green-500 text-white font-semibold py-3 rounded opacity-70 cursor-not-allowed" %>
-      <!-- ↑ opacity-70 と cursor-not-allowed で「まだ押せない感」を表現 -->
       <p class="text-sm text-gray-500">美容師・サロン関係者の方はこちら（準備中）</p>
     </div>
   </main>
-</div>
+</body>
+</html>
