@@ -1,31 +1,28 @@
 <header class="w-full bg-stone-400">
   <div class="w-full px-8 flex justify-between items-center py-4">
-    <!-- 左側：サービスロゴ -->
     <a href="/" class="text-3xl font-extrabold text-white">precut</a>
 
-    <!-- 右側：ナビゲーション -->
     <nav class="flex items-center space-x-6">
       <% if user_signed_in? %>
         <div class="relative group">
-            <button class="w-9 h-9 bg-emerald-500 rounded-full flex items-center justify-center hover:bg-emerald-400 transition-colors">
+            <button class="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
               <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
               </svg>
             </button>
 
-            <!-- ドロップダウン -->
             <div class="absolute right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
               <%= link_to "カウンセリング履歴", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
-              <%= link_to "設定", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
+              <%= link_to "設定・ヘルプ(準備中)", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
               <%= link_to "ログアウト", destroy_user_session_path,
                     data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
                     class: "block px-4 py-2 hover:bg-gray-100 rounded-b-lg" %>
             </div>
           </div>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "text-lg text-white hover:text-gray-900 transition-colors duration-200" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "bg-blue-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-200" %>
+        <%= link_to "ログイン", new_user_session_path, class: "bg-stone-400 text-white font-semibold px-4 py-2 rounded-md hover:bg-stone-500 transition-colors duration-200" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "bg-stone-400 text-white font-semibold px-4 py-2 rounded-md hover:bg-stone-500 transition-colors duration-200" %>
       <% end %>
     </nav>
   </div>
