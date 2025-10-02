@@ -11,4 +11,5 @@ class User < ApplicationRecord
           validates :email, presence: true
           # パスワード
           validates :encrypted_password, presence: true
+  has_many :consultations, dependent: :destroy
 end

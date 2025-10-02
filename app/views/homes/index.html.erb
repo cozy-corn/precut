@@ -31,8 +31,11 @@
     </div>
 
     <div class="mt-8 space-y-4 w-full max-w-md mx-auto">
-      <%= link_to "カウンセリングを始める", new_user_registration_path,
-            class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
+      <% if user_signed_in? %>
+        <%= link_to "カウンセリングを始める", new_answer_path, class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
+      <% else %>
+        <%= link_to "カウンセリングを始める", new_user_registration_path, class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
+      <% end %>
 
       <%= link_to "美容師専用ページ", "#",
             class: "block w-full text-center bg-green-500 text-white font-semibold py-3 rounded opacity-70 cursor-not-allowed" %>
