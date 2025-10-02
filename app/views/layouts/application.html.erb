@@ -21,7 +21,7 @@
   <body class="min-h-screen bg-gray-50">
     <!-- 共通ヘッダー -->
     <%= render "shared/header" %>
-
+    <%= render 'shared/flash_messages' %>
     <!-- 各画面の中身 -->
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
