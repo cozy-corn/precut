@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_02_031649) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_02_111047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_02_031649) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["consultation_id"], name: "index_answers_on_consultation_id"
+  end
+
+  create_table "consultation_sharings", force: :cascade do |t|
+    t.bigint "consultation_id", null: false
+    t.string "shared_token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["consultation_id"], name: "index_consultation_sharings_on_consultation_id"
+    t.index ["shared_token"], name: "index_consultation_sharings_on_shared_token", unique: true
   end
 
   create_table "consultations", force: :cascade do |t|
@@ -47,5 +57,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_02_031649) do
   end
 
   add_foreign_key "answers", "consultations"
+  add_foreign_key "consultation_sharings", "consultations"
   add_foreign_key "consultations", "users"
 end
