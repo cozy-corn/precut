@@ -1,6 +1,6 @@
 <header class="w-full bg-stone-400">
   <div class="w-full px-8 flex justify-between items-center py-4">
-    <a href="/" class="text-3xl font-extrabold text-white">precut</a>
+    <%= link_to "precut", root_path, class: "text-3xl font-extrabold text-white" %>
 
     <nav class="flex items-center space-x-6">
       <% if user_signed_in? %>
