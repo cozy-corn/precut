@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "homes#index"
+  
+  #Consultationの詳細（show）ページへのルートを追加
+  resources :consultations, only: [:show]
 
   resources :answers, only: [ :new, :create ]
 end

@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
     if @current_question.nil?
       # 全ての質問が完了したら、セッションを終了して完了ページにリダイレクト(new_answer_pathは仮のパスです。実際には完了ページのパスに変更する)
       session.delete(:consultation_id)
-      redirect_to new_answer_path(@consultation), notice: "カウンセリングが完了しました！"
+      redirect_to consultation_path(@consultation), notice: "カウンセリングが完了しました！"
     else
       # 質問が残っていれば、回答フォームを準備
       @answer = @consultation.answers.new
