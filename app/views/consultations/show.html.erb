@@ -31,6 +31,18 @@
     <% end %>
   </div>
 
+<%# ========================================================== %>
+  <%# ここから追加する QRコード/共有機能のエリア %>
+  <h2 class="text-2xl font-semibold mt-10 mb-4 text-gray-700 border-t pt-6">
+    共有リンク発行
+  </h2>
+  
+  <%# 👈 部分テンプレートの呼び出し (Turbo Frameで囲むのがポイント) %>
+  <turbo-frame id="sharing_widget">
+    <%= render 'consultations/sharing_widget', consultation: @consultation %>
+  </turbo-frame>
+  <%# ========================================================== %>
+
   <div class="mt-10 text-center">
     <%= link_to 'カウンセリング一覧に戻る', root_path, class: "text-blue-500 hover:underline" %>
   </div>
