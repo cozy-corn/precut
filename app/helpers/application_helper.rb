@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def qrcode
-    qrcode = RQRCode::QRCode.new("https://github.com/")
+  def qrcode(url_to_share)
+    qrcode = RQRCode::QRCode.new(url_to_share)
     svg = qrcode.as_svg(
       color: "000",
       shape_rendering: "crispEdges",
