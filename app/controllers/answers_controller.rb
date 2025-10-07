@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
     # Step 1: 質問リストを読み込む
     include QuestionList
 
