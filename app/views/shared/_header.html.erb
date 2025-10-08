@@ -1,29 +1,44 @@
 <header class="w-full bg-stone-400">
   <div class="w-full px-8 flex justify-between items-center py-4">
-    <%= link_to "precut", root_path, class: "text-3xl font-extrabold text-white" %>
-
+    <%= link_to "precut", root_path, 
+        class: "inline-flex items-center text-3xl font-extrabold text-white px-3 py-2 rounded-lg 
+               hover:bg-stone-500 transition-colors" %>
+    
     <nav class="flex items-center space-x-6">
-      <% if user_signed_in? %>
-        <div class="relative group">
-            <button class="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-              </svg>
-            </button>
-
-            <div class="absolute right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <%= link_to "マイページ", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
-              <%= link_to "カウンセリング履歴", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
-              <%= link_to "設定・ヘルプ(準備中)", "#", class: "block px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
-              <%= link_to "ログアウト", destroy_user_session_path,
-                    data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
-                    class: "block px-4 py-2 hover:bg-gray-100 rounded-b-lg" %>
-            </div>
-          </div>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "bg-stone-400 text-white font-semibold px-4 py-2 rounded-md hover:bg-stone-500 transition-colors duration-200" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "bg-stone-400 text-white font-semibold px-4 py-2 rounded-md hover:bg-stone-500 transition-colors duration-200" %>
-      <% end %>
+      <details class="relative">
+        
+        <summary class="inline-flex items-center justify-center w-10 h-10 rounded-lg text-white cursor-pointer 
+                        bg-stone-500 hover:bg-stone-600 transition-colors list-none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-6 w-6 stroke-current text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </summary>
+        
+        <ul class="absolute top-full right-0 mt-3 w-52 p-2 shadow-xl bg-gray-800/90 backdrop-blur-sm rounded-lg z-10 text-white space-y-1">
+          
+          <% if user_signed_in? %>
+          <!-- ログイン時 -->
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">マイページ</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">カウンセリング履歴</a></li>
+            <li class="border-t border-gray-600 my-1"></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path,
+                  data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md text-red-400 font-semibold" %></li>
+          <% else %>
+          <!-- 未ログイン -->
+            <li><%= link_to "ログイン", new_user_session_path, 
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
+            <li><%= link_to "新規登録", new_user_registration_path, 
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
+          <% end %>
+            <!-- 共通 -->
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">使い方ガイド</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">プライバシーポリシー</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">利用規約</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">お問い合わせ</a></li>
+        </ul>
+      </details>
     </nav>
   </div>
 </header>
+
