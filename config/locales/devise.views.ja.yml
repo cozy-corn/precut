@@ -9,7 +9,7 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        email: メールアドレス
         full_name: 氏名
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
@@ -19,7 +19,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード（確認用）
         remember_created_at: ログイン記憶時刻
-        remember_me: ログインを記憶する
+        remember_me: ログイン状態を保持
         reset_password_sent_at: パスワードリセット送信時刻
         reset_password_token: パスワードリセット用トークン
         sign_in_count: ログイン回数
@@ -103,10 +103,10 @@ ja:
         update: 更新
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
       new:
-        sign_up: アカウント登録
+        sign_up: 新規登録
         sign_in: ログイン
         password: パスワード
-        email: Eメール
+        email: メールアドレス
         full_name: 氏名
         gender: 性別
         age_group: 年代
@@ -122,9 +122,9 @@ ja:
       already_signed_out: 既にログアウト済みです。
       new:
         sign_in: ログイン
-        sign_up: アカウント登録
+        sign_up: 新規登録
         password: パスワード
-        email: Eメール
+        email: メールアドレス
       signed_in: ログインしました。
       signed_out: ログアウトしました。
     shared:
@@ -132,10 +132,11 @@ ja:
         back: 戻る
         didn_t_receive_confirmation_instructions: アカウント確認のメールを受け取っていませんか？
         didn_t_receive_unlock_instructions: アカウントのロック解除方法のメールを受け取っていませんか？
-        forgot_your_password: パスワードを忘れましたか？
+        forgot_your_password: パスワードを忘れた方はこちら
         sign_in: ログイン
         sign_in_with_provider: "%{provider}でログイン"
-        sign_up: アカウント登録
+        sign_up: 新規登録
+        already_signed_in: 既にアカウントをお持ちの方はこちら
       minimum_password_length:
         other: "（%{count}字以上）"
     unlocks:
