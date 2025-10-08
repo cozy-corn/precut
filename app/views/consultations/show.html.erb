@@ -1,6 +1,6 @@
 <div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg my-8">
   <h1 class="text-3xl font-bold mb-6 text-center text-gray-800 border-b pb-2">
-    カルテ生成ページ (カウンセリング結果)
+    カルテ (カウンセリング結果)
   </h1>
 
   <div class="mb-8">
@@ -8,7 +8,7 @@
       <span class="font-semibold">カルテID:</span> <%= @consultation.id %>
     </p>
     <p class="text-lg text-gray-600">
-      <span class="font-semibold">開始日時:</span> <%= @consultation.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+      <span class="font-semibold">開始日時:</span> <%= @consultation.created_at.strftime("%Y年%m月%d日") %>
     </p>
   </div>
   
@@ -32,18 +32,18 @@
   </div>
 
 <%# ========================================================== %>
-  <%# ここから追加する QRコード/共有機能のエリア %>
-  <h2 class="text-2xl font-semibold mt-10 mb-4 text-gray-700 border-t pt-6">
-    共有リンク発行
+  <%# ここからQRコード/共有機能のエリア %>
+  <h2 class="text-2xl font-semibold mt-10 mb-4 text-center text-gray-700 border-t pt-6">
+    共有リンクでカルテを美容師さんに送信しよう
   </h2>
   
-  <%# 👈 部分テンプレートの呼び出し (Turbo Frameで囲むのがポイント) %>
+  <%# 部分テンプレートの呼び出し (Turbo Frameで囲む %>
   <turbo-frame id="sharing_widget">
     <%= render 'consultations/sharing_widget', consultation: @consultation %>
   </turbo-frame>
   <%# ========================================================== %>
 
   <div class="mt-10 text-center">
-    <%= link_to 'カウンセリング一覧に戻る', root_path, class: "text-blue-500 hover:underline" %>
+    <%= link_to 'ホームに戻る', root_path, class: "text-blue-500 hover:underline" %>
   </div>
 </div>

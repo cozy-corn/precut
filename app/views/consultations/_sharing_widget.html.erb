@@ -1,10 +1,9 @@
-<%# このパーシャルは、親ビューから @consultation が渡されていることを前提とします %>
 <% sharing = @consultation.consultation_sharing %>
 
 <div class="p-4 border rounded-lg bg-white shadow-sm">
   <% if sharing.present? %>
     <%# 共有データがある場合（QRコード表示） %>
-    <%# shared_consultation_url は config/routes.rb で定義したパスヘルパーです %>
+    <%# shared_consultation_url は config/routes.rb で定義したパスヘルパー %>
     <% shared_url = shared_consultation_url(token: sharing.shared_token) %>
     
     <div class="text-center">

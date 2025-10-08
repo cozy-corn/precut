@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        blank: "を入力してください"
+        too_short: "は%{count}文字以上で入力してください"
+        too_long: "は%{count}文字以内で入力してください"
+        invalid: "は不正な値です"
+        confirmation: "と%{attribute}の入力が一致しません"
+        taken: "はすでに存在します"
+      models:
+        user:
+          attributes:
+            name:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上で入力してください"
+              too_long: "は%{count}文字以内で入力してください"
+            email:
+              blank: "を入力してください"
+              invalid: "の形式が正しくありません"
+              taken: "は登録できませんでした。"
+            password:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上で入力してください"
+            password_confirmation:
+              confirmation: "とパスワードの入力が一致しません"
