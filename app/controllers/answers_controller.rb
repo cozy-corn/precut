@@ -2,8 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
     # Step 1: 質問リストを読み込む
     include QuestionList
-
-
+    QUESTIONS = QuestionList::QUESTIONS
   def new
     # ① 継続中のカウンセリングセッションを取得または開始
     # セッションにIDがあれば既存のものを使い、なければ新しく作成する
@@ -11,7 +10,9 @@ class AnswersController < ApplicationController
       @consultation = current_user.consultations.find_by(id: session[:consultation_id])
       @consultation ||= current_user.consultations.create!
     else
+      #  データベースに新しいconsultationレコードを作成
       @consultation = current_user.consultations.create!
+      # カルテIDをセッションに保存している
       session[:consultation_id] = @consultation.id
     end
 
@@ -23,7 +24,7 @@ class AnswersController < ApplicationController
 
     # ④ すべての質問が終わったかチェック
     if @current_question.nil?
-      # 全ての質問が完了したら、セッションを終了して完了ページにリダイレクト(new_answer_pathは仮のパスです。実際には完了ページのパスに変更する)
+      # 全ての質問が完了したら、セッションを終了して完了ページにリダイレクト
       session.delete(:consultation_id)
       redirect_to consultation_path(@consultation), notice: "カウンセリングが完了しました！"
     else
@@ -42,7 +43,7 @@ class AnswersController < ApplicationController
     # フォームから送られた回答を Answer モデルに紐づける
     @answer = @consultation.answers.new(answer_params)
 
-    # 回答をデータベースに保存
+    # 回答をanswersテーブルのデータベースに保存
     if @answer.save
       # 保存が成功したら、次の質問のためにnewアクションへリダイレクト
       redirect_to new_answer_path
