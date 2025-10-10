@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_02_111047) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_10_034524) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
@@ -38,7 +39,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_02_111047) do
     t.string "status", default: "draft", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "uuid_url"
     t.index ["user_id"], name: "index_consultations_on_user_id"
+    t.index ["uuid_url"], name: "index_consultations_on_uuid_url", unique: true
   end
 
   create_table "users", force: :cascade do |t|
