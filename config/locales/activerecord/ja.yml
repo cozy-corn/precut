@@ -1,5 +1,10 @@
 ja:
   activerecord:
+    attributes:
+      user:
+        full_name: "氏名"
+        email: "メールアドレス"
+        password: "パスワード"
     errors:
       messages:
         blank: "を入力してください"
