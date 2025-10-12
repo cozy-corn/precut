@@ -9,7 +9,5 @@ class User < ApplicationRecord
           validates :full_name, length: { in: 2..50 }
           # email
           validates :email, presence: true
-          # パスワード
-          validates :encrypted_password, presence: true
   has_many :consultations, dependent: :destroy
 end
