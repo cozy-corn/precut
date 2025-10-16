@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   # Consultationの詳細（show）ページへのルートを追加
   resources :consultations, only: [ :show ] do
-    get '', on: :member, action: :show, constraints: { id: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
+    get "", on: :member, action: :show, constraints: { id: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
   end
 
   resources :answers, only: [ :new, :create ]
