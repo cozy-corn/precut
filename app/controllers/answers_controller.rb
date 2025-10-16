@@ -50,9 +50,10 @@ class AnswersController < ApplicationController
     else
       # 保存に失敗したら、同じ画面を再表示（エラーメッセージ付き）
       # ここでは`@answers`や`@current_question`も再設定が必要
+      answered_count = @consultation.answers.count
+      @current_question = QUESTIONS[answered_count] # 現在の質問を再設定
       @answers = @consultation.answers.order(:created_at)
-      @current_question = @answer.question
-        render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
    end
 
