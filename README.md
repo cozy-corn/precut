@@ -135,7 +135,7 @@ MVPリリース時
     * カルテの「引き継ぎ」によって信頼性と接客品質向上
 
 ### 画面遷移図
-Figma：https://www.figma.com/design/L2BzMTbrb7J4uoxFcSPnaG/precut?node-id=0-1&p=f&t=BmkXEtzcrkYIqCy7-0
+Figma：https://www.figma.com/design/L2BzMTbrb7J4uoxFcSPnaG/precut?node-id=0-1&p=f&t=TbM9l7zylXfAPNEy-0
 
 
 ### READMEに記載した機能
