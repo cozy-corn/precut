@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :salons, controllers: {
+    sessions: "salons/sessions", # サロン用にカスタマイズしたセッションコントローラーを指定
+    passwords: "salons/passwords", # サロン用にカスタマイズしたパスワードコントローラーを指定
+    registrations: "salons/registrations" # サロン用にカスタマイズした登録コントローラーを指定
+  }
   devise_for :users
   get "homes/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
