@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Salons::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  # sign_upの処理が実行される前に、このメソッドを呼ぶように設定
+  before_action :configure_sign_up_params, only: [ :create ]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -38,12 +39,15 @@ class Salons::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  protected
+  # 新規登録（sign_up）時に許可するパラメータ（:salon_name）を追加する
+  def configure_sign_up_params
+    # Deviseのデフォルト（:email, :password, :password_confirmation）に加えて
+    # DBMLで定義した :salon_name を許可
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :salon_name ])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

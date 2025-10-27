@@ -1,6 +1,6 @@
 class Consultation < ApplicationRecord
   belongs_to :user
-
+  belongs_to :salon
   enum status: { draft: "draft", completed: "completed", shared: "shared", archived: "archived" }
   has_many :answers, dependent: :destroy
   has_one :consultation_sharing

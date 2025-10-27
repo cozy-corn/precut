@@ -1,10 +1,19 @@
 ja:
   activerecord:
+    models:
+      user: ユーザー
+      salon: サロン
     attributes:
       user:
         full_name: "氏名"
         email: "メールアドレス"
         password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+      salon:
+        salon_name: "サロン名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
     errors:
       messages:
         blank: "を入力してください"
@@ -29,3 +38,4 @@ ja:
               too_short: "は%{count}文字以上で入力してください"
             password_confirmation:
               confirmation: "とパスワードの入力が一致しません"
+  
