@@ -1,29 +1,51 @@
-<h2>Sign up</h2>
+   <!-- 新規登録画面 -->
+<div class="max-w-md mx-auto bg-gray-100">
+  <div class="flex flex-col items-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 max-w-sm">
+      <h1 class="text-2xl font-bold mb-6 text-center text-gray-800"><%= t('.sign_up') %></h1>
+      <div class="flex flex-col space-y-4">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "salons/shared/error_messages", resource: resource %>
+          <!-- メールアドレス -->
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-1">
+              <%= t('.email') %> <span class="text-red-500">*</span>
+            </label>
+            <%= f.email_field :email, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: t('.email') %>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "salons/shared/error_messages", resource: resource %>
+          <!-- サロン名 -->
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-1">
+              <%= t('.salon_name') %> <span class="text-red-500">*</span>
+            </label>
+            <%= f.text_field :salon_name, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: t('.salon_name') %>
+          </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <!-- パスワード -->
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-1">
+            <%= t('.password') %><span class="text-red-500">*</span>
+            </label>
+            <%= f.password_field :password, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: t('.password') %>
+          </div>
+
+          <!-- パスワード確認 -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-1">
+            <%= t('.password_confirmation') %><span class="text-red-500">*</span>
+            </label>
+            <%= f.password_field :password_confirmation, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", placeholder: t('.password_confirmation') %>
+          </div>
+
+           <!-- 新規登録ボタン -->
+          <%= f.submit t('.sign_up'), class: "w-full bg-emerald-500 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-emerald-700 transition-colors duration-200" %>
+        <% end %>
+
+        <div class="mt-4 text-center">
+          <%= render "salons/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "salons/shared/links" %>
+</div>

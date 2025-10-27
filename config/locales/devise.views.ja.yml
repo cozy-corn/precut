@@ -29,6 +29,8 @@ ja:
     models:
       user:
         other: ユーザー
+      salon: 
+        other: サロン
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -154,3 +156,30 @@ ja:
       not_locked: はロックされていません。
       not_saved:
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+  salons:
+    registrations:
+      new:
+        email: メールアドレス
+        salon_name: サロン名
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        sign_up: 新規登録
+    sessions:
+      already_signed_out: 既にログアウト済みです。
+      new:
+        sign_in: ログイン
+        sign_up: 新規登録
+        password: パスワード
+        email: メールアドレス
+      signed_in: ログインしました。
+      signed_out: ログアウトしました。
+    shared:
+      links:
+        back: 戻る
+        didn_t_receive_confirmation_instructions: アカウント確認のメールを受け取っていませんか？
+        didn_t_receive_unlock_instructions: アカウントのロック解除方法のメールを受け取っていませんか？
+        forgot_your_password: パスワードを忘れた方はこちら
+        sign_in: ログイン
+        sign_in_with_provider: "%{provider}でログイン"
+        sign_up: 新規登録
+        already_signed_in: 既にサロンアカウントをお持ちの方はこちら
