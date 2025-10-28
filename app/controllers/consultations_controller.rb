@@ -34,4 +34,8 @@ class ConsultationsController < ApplicationController
     @answers = @consultation.answers.order(created_at: :asc)
     # 取得した@consultationと@answersをビュー（HTML）に渡す
   end
+
+  def index
+    @consultations = current_user.consultations.order(created_at: :desc)
+  end
 end
