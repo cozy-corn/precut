@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "homes#index"
   devise_for :salons, controllers: {
     sessions: "salons/sessions", # サロン用にカスタマイズしたセッションコントローラーを指定
     passwords: "salons/passwords", # サロン用にカスタマイズしたパスワードコントローラーを指定
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "homes#index"
+
 
   # Consultationの詳細（show）ページへのルートを追加
   resources :consultations, only: [ :show ] do
@@ -29,4 +30,9 @@ Rails.application.routes.draw do
   resources :consultation_sharings, only: [ :create ]
   # 3. トークンを使ったアクセス用（例: /shared/abc12345）
   get "shared/:token", to: "consultations#show_shared", as: :shared_consultation
+  # サロン側のルーティング
+  namespace :salons do
+    resources :consultations, only: [ :index, :show ] do
+    end
+  end
 end
