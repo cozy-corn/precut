@@ -24,6 +24,9 @@ class AnswersController < ApplicationController
 
     # ④ すべての質問が終わったかチェック
     if @current_question.nil?
+      # ★★★ ここにステータス変更処理を追加 ★★★
+      # @consultation の status を completed に変更し、DBに保存する
+      @consultation.update!(status: :completed)
       # 全ての質問が完了したら、セッションを終了して完了ページにリダイレクト
       session.delete(:consultation_id)
       redirect_to consultation_path(@consultation), notice: "カウンセリングが完了しました！"
