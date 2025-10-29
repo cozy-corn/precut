@@ -19,7 +19,8 @@
           <% if user_signed_in? %>
           <!-- ログイン時 -->
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">マイページ</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">カウンセリング履歴</a></li>
+            <li><%= link_to "カウンセリング履歴", consultations_path,
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
             <li class="border-t border-gray-600 my-1"></li>
             <li><%= link_to "ログアウト", destroy_user_session_path,
                   data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },

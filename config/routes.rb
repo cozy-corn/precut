@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :consultations, only: [ :show ] do
     get "", on: :member, action: :show, constraints: { id: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
   end
-
+  resources :consultations, only: [ :index ]
   resources :answers, only: [ :new, :create ]
 
   resources :consultation_sharings, only: [ :create ]
