@@ -9,6 +9,9 @@ module Salons
       # GET /salons/consultations (美容師モードのホーム/カルテ一覧)
       def index
       end
+
+      def scan
+      end
       # 詳細表示など他のアクションもここに追加します
     end
 end
