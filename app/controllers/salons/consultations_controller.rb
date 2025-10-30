@@ -8,6 +8,8 @@ module Salons
       layout "salon_application"
       # GET /salons/consultations (美容師モードのホーム/カルテ一覧)
       def index
+        # ログイン中の美容師に紐づくConsultationを全て取得し、作成日時の降順で並べる
+        @consultations = current_salon.consultations.order(created_at: :desc)
       end
 
       def scan

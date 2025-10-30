@@ -20,7 +20,12 @@ class ConsultationsController < ApplicationController
     # 4. カルテに紐づく回答を取得
     @answers = @consultation.answers.order(created_at: :asc)
 
-    # 5. 通常のカルテ詳細ビューを再利用して表示
+    # 5. ログインしているサロンがいる場合、初回アクセス時のみ紐づける
+    if current_salon && @consultation.salon_id.nil?
+      @consultation.update!(salon_id: current_salon.id)
+    end
+
+    # 6. 通常のカルテ詳細ビューを再利用して表示
     render "consultations/show"
   end
 
