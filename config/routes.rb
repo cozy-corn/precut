@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # サロン側のルーティング
   namespace :salons do
     resources :consultations, only: [ :index, :show ] do
+      get :scan, on: :collection
     end
   end
 end
