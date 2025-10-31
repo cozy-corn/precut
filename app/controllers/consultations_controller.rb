@@ -1,5 +1,5 @@
 class ConsultationsController < ApplicationController
-  before_action :authenticate_user!, only: [ :show ] # 通常のshowは認証必須
+  before_action :authenticate_user!, only: [ :show, :index ] # 通常のshowは認証必須
 
   # トークンを使って共有カルテを表示するアクション
   # 共有リンクからのアクセスなので、認証は不要（セキュリティはトークンに依存）
