@@ -1,0 +1,8 @@
+<%= search_form_for @q, url: url, class: 'flex items-center space-x-2' do |f| %>
+  <%= f.search_field :user_full_name_cont, 
+    class: 'form-control flex-grow p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500', 
+    placeholder: 'お客様のお名前を検索 (オートコンプリート)',
+    data: { controller: 'autocomplete', target: 'autocomplete.input' } %>
+  
+  <%= f.submit '検索', class: 'btn btn-primary bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg transition duration-150' %>
+<% end %>

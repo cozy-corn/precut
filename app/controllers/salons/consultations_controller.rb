@@ -11,8 +11,10 @@ module Salons
       @total_consultations_count = current_salon.consultations.count
       @archived_consultations_count = current_salon.consultations.where(status: :archived).count
       # ログイン中の美容師に紐づくConsultationを全て取得し、作成日時の降順で並べる
-      consultations = current_salon.consultations.order(created_at: :desc)
-      @consultations = consultations.includes(:answers, :user)
+      @q = current_salon.consultations.ransack(params[:q])
+      @consultations = @q.result(distinct: true)
+                   .includes(:answers, :user)
+                   .order(created_at: :desc)
     end
 
     def show
