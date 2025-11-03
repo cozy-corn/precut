@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get "shared/:token", to: "consultations#show_shared", as: :shared_consultation
   # サロン側のルーティング
   namespace :salons do
-    resources :consultations, only: [ :index, :show ] do
+    resources :consultations, only: [ :index, :show, :update ] do
       get :scan, on: :collection
     end
   end
