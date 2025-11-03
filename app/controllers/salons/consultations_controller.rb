@@ -15,6 +15,21 @@ module Salons
         @consultations = consultations.includes(:answers, :user)
       end
 
+    def show
+      # URLから渡されたIDでカルテを検索
+      @consultation = Consultation.find(params[:id])
+      # セキュリティチェック
+      # 取得したカルテが、現在ログイン中の美容室に紐づいているか確認
+      unless @consultation.salon == current_salon
+        redirect_to salons_consultations_path, alert: "アクセス権限がありません。"
+      end
+      # ※ N+1問題対策: 全回答データをここで一括で読み込む
+      @answers = @consultation.answers.includes(:consultation)
+    end
+
+
+
+      # GET /salons/consultations/scan (QRコードスキャン用ページ)
       def scan
       end
       # 詳細表示など他のアクションもここに追加します
