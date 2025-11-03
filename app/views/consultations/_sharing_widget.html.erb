@@ -27,7 +27,7 @@
     <%# 共有データがない場合（ボタン表示） %>
     <%= button_to '共有リンクを生成する', consultation_sharings_path(consultation_id: @consultation.id), 
                   method: :post, 
-                  class: 'w-full py-3 bg-blue-600 text-white font-bold rounded-md hover:bg-blue-700 transition',
+                  class: 'w-full py-3 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700 transition',
                   data: { turbo_frame: 'sharing_widget' } %>
   <% end %>
 </div>

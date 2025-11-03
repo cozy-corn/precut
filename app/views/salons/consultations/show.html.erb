@@ -1,1 +1,46 @@
-<h1><%= @consultation.user.full_name %> 様のカルテ詳細</h1>
+<%# 美容師側の顧客カルテ詳細 %>
+<div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg my-8">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800 border-b pb-2">
+    <%= @consultation.user.full_name %> 様のカルテ
+  </h1>
+  <%# カルテIDと作成日時 %>
+  <div class="mb-8">
+    <p class="text-lg text-gray-600">
+      <span class="font-semibold">カルテID:</span> <%= @consultation.id %>
+    </p>
+    <p class="text-lg text-gray-600">
+      <span class="font-semibold">作成日時:</span> <%= @consultation.created_at.strftime("%Y年%m月%d日") %>
+    </p>
+  </div>
+
+  <div class="space-y-6">
+    <% @answers.each.with_index(1) do |answer, index| %>
+      <div class="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50 rounded-r-md">
+        
+        <p class="text-base font-bold text-gray-900 mb-1">
+          Q<%= index %>: <%= answer.question %>
+        </p>
+
+        <div class="p-3 bg-white border border-gray-200 rounded-md shadow-sm">
+          <p class="text-gray-700 whitespace-pre-wrap"><%= answer.answer %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%# ボタンを追加 %>
+  <div class="mb-4 flex justify-end">
+    <%#  status が 'archived' でない場合のみボタンを表示 %>
+    <% if @consultation.status != 'archived' %>
+      <%= button_to "確認済みにする", 
+                    salons_consultation_path(@consultation), 
+                    method: :patch, 
+                    params: { consultation: { status: 'archived' } },
+                    data: { confirm: "このカルテを「確認済」にしますか？" },
+                    class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200 shadow-md" %>
+    <% else %>
+      <span class="text-sm font-semibold text-green-600 bg-green-100 px-3 py-1 rounded-full">
+        確認済み (Archived)
+      </span>
+    <% end %>
+  </div>
