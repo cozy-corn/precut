@@ -25,6 +25,12 @@ Rails.application.routes.draw do
     get "", on: :member, action: :show, constraints: { id: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
   end
   resources :consultations, only: [ :index ]
+  resources :consultations do
+    member do
+      get :recreate # /consultations/:id/recreate 再作成用ルート
+      post :recreate # /consultations/:id/recreate 再作成保存用ルート
+    end
+  end
   resources :answers, only: [ :new, :create ]
 
   resources :consultation_sharings, only: [ :create ]
@@ -33,8 +39,8 @@ Rails.application.routes.draw do
   # サロン側のルーティング
   namespace :salons do
     resources :consultations, only: [ :index, :show, :update ] do
-      get :scan, on: :collection
-      get :autocomplete, on: :collection
+      get :scan, on: :collection # /salons/consultations/scan　QRコード読み取りページ
+      get :autocomplete, on: :collection # /salons/consultations/autocomplete ユーザー検索のオートコンプリート用
     end
   end
 end

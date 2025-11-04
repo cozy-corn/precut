@@ -46,4 +46,12 @@
   <div class="mt-10 text-center">
     <%= link_to 'ホームに戻る', root_path, class: "text-blue-500 hover:underline" %>
   </div>
+
+  <% if current_user.present? %>
+  <div class="mt-6 text-center">
+    <%= link_to "このカルテを元に新たなカルテを作成", 
+        recreate_consultation_path(@consultation),
+        class: "btn btn-primary" %>
+  </div>
+  <% end %>
 </div>
