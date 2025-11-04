@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   namespace :salons do
     resources :consultations, only: [ :index, :show, :update ] do
       get :scan, on: :collection
+      get :autocomplete, on: :collection
     end
   end
 end

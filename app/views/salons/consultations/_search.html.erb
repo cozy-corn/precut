@@ -1,8 +1,24 @@
-<%= search_form_for @q, url: url, class: 'flex items-center space-x-2' do |f| %>
-  <%= f.search_field :user_full_name_cont, 
-    class: 'form-control flex-grow p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500', 
-    placeholder: 'お客様のお名前を検索 (オートコンプリート)',
-    data: { controller: 'autocomplete', target: 'autocomplete.input' } %>
+<%# フォーム全体にFlexboxを適用し、横並びにする %>
+<%= search_form_for @q, url: url, class: 'flex items-center space-x-2 w-full', method: :get do |f| %>
   
-  <%= f.submit '検索', class: 'btn btn-primary bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg transition duration-150' %>
+  <%# 検索フィールド部分 (オートコンプリートのコントローラーを適用) %>
+  <div data-controller="autocomplete" 
+       data-autocomplete-url-value="<%= autocomplete_salons_consultations_path %>"
+       data-autocomplete-limit-value="10"
+       class="relative flex-grow">
+    
+    <%# 検索フィールド本体。入力値の保持もここで対応 %>
+    <%= f.search_field :user_full_name_cont, 
+      class: 'form-control w-full p-2 text-gray-900 placeholder-white border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500', 
+      placeholder: 'お客様のお名前を検索 (オートコンプリート)',
+      value: (params[:q] && params[:q][:user_full_name_cont]),
+      data: { autocomplete_target: 'input' } %>
+    <%= f.hidden_field :user_full_name, data: { autocomplete_target: 'hidden' } %>
+    <ul class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 hidden" 
+        data-autocomplete-target="results"></ul>
+  </div>
+  
+  <%# 検索ボタン %>
+  <%= f.submit '検索', class: 'btn btn-primary bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-lg transition duration-150 flex-shrink-0' %>
 <% end %>
+

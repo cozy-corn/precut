@@ -50,5 +50,12 @@ module Salons
     # GET /salons/consultations/scan (QRコードスキャン用ページ)
     def scan
     end
+
+    def autocomplete
+      @users = User.where("full_name like ?", "%#{params[:q]}%")
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 end
