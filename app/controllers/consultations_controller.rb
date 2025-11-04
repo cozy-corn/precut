@@ -47,7 +47,7 @@ class ConsultationsController < ApplicationController
   def recreate
     @original = current_user.consultations.find_by!(uuid_url: params[:id])
 
-    if request.get?
+    if !request.post?
       # 元カルテのanswersを取得してフォームに表示
       @original_answers = @original.answers.order(:created_at)
       render :recreate
