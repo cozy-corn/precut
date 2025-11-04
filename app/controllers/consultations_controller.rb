@@ -67,7 +67,6 @@ class ConsultationsController < ApplicationController
         )
       end
     end
-
     redirect_to consultation_path(@consultation), notice: "新しいカルテを作成しました。"
   end
 end
