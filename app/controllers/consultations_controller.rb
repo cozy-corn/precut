@@ -49,8 +49,7 @@ class ConsultationsController < ApplicationController
 
     if request.get?
       # 元カルテのanswersを取得してフォームに表示
-      @original_answers = 
-      @original.answers.order(:created_at)
+      @original_answers = @original.answers.order(:created_at)
       render :recreate
       return
     end
