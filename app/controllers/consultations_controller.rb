@@ -43,4 +43,31 @@ class ConsultationsController < ApplicationController
   def index
     @consultations = current_user.consultations.order(created_at: :desc)
   end
+
+  def recreate
+    @original = current_user.consultations.find_by!(uuid_url: params[:id])
+
+    if request.get?
+      # 元カルテのanswersを取得してフォームに表示
+      @original_answers = @original.answers.order(:created_at)
+      render :recreate
+      return
+    end
+
+    # POST処理
+    answers_params = params.permit(answers: [ :question, :answer ])[:answers] || []
+
+    ActiveRecord::Base.transaction do
+      @consultation = current_user.consultations.create!(status: :draft)
+
+      answers_params.each do |a|
+        @consultation.answers.create!(
+          question: a[:question],
+          answer: a[:answer]
+        )
+      end
+    end
+
+    redirect_to consultation_path(@consultation), notice: "新しいカルテを作成しました。"
+  end
 end
