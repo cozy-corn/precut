@@ -5,6 +5,6 @@ class Salon < ApplicationRecord
          :recoverable, :rememberable, :validatable
          # サロン名
          validates :salon_name, presence: true
-  # dependent: :nullifyは、サロンが削除されたときに関連する相談のsalon_idをnullに設定します
+  # dependent: :nullifyは、サロンが削除されたときに関連する相談のsalon_idをnullに設定
   has_many :consultations, dependent: :nullify
 end

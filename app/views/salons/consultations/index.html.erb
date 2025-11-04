@@ -29,8 +29,8 @@
 
     <%# 3. 検索タブ　全てと確認済の部分（ダミーとして実装） %>
     <div class="bg-white p-4 shadow-inner border-b border-gray-100 flex justify-between text-sm font-semibold text-gray-600 sticky top-16 z-10">
-      <a href="#" class="text-blue-500 border-b-2 border-blue-500 hover:text-blue-700 pb-1">すべて</a>
-      <a href="#" class="text-blue-500 border-b-2 border-blue-500 hover:text-blue-700 pb-1">確認済</a>
+      <a href="#" class="text-blue-500  hover:text-blue-700 pb-1">すべて</a>
+      <a href="#" class="text-blue-500  hover:text-blue-700 pb-1">確認済</a>
     </div>
 
     <%# 4. 顧客カルテのリスト %>
@@ -68,7 +68,7 @@
                 </span>
               </div>
               
-              <%# Q4の質問と回答（写真の「ショートボブ希望、癖毛対応...」の部分） %>
+              <%# Q4の質問と回答（figmaの「ショートボブ希望、癖毛対応...」の部分） %>
               <% if q4_answer.present? %>
                 <p class="text-sm text-gray-600 line-clamp-2">
                   <span class="font-medium text-gray-700">
@@ -81,11 +81,6 @@
                   Q4の回答が見つかりません
                 </p>
               <% end %>
-              
-              <%# 予約日時などの補足情報（写真の「2時間前・リピーター」の部分） %>
-              <div class="text-xs text-gray-500 mt-1 flex space-x-3">
-                <span>将来ここにsimple_calendarの予約予定を入れられたら入れる</span>
-              </div>
             </div>
 
             <%# 矢印アイコン %>
