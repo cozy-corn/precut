@@ -1,4 +1,18 @@
+<div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg my-8">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800 border-b pb-2">
+    このカルテを元に新しいカルテを作成
+  </h1>
+
+<%= form_with url: recreate_consultation_path(@original), method: :post, local: true do |f| %>
+  <% @original_answers.each_with_index do |ans, i| %>
+    <div class="mb-4">
+      <p class="font-semibold text-gray-700">Q<%= i+1 %>：<%= ans.question %></p>
+      <%= hidden_field_tag "answers[][question]", ans.question %>
+      <%= text_area_tag "answers[][answer]", ans.answer, rows: 3, class: "w-full border rounded p-2 mt-1" %>
+    </div>
+  <% end %>
 
   <div class="mt-6">
-   a
+    <%= f.submit "新しいカルテとして保存", class: "w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" %>
   </div>
+<% end %>
