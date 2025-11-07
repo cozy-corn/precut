@@ -44,4 +44,5 @@ Rails.application.routes.draw do
       get :autocomplete, on: :collection # /salons/consultations/autocomplete ユーザー検索のオートコンプリート用
     end
   end
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

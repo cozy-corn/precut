@@ -4,13 +4,13 @@
 
   <%= form_with model: @user, url: user_path, method: :patch, local: true do |f| %>
     <div class="mb-4">
-      <%= f.label :name, "名前", class: "block font-medium mb-1" %>
-      <%= f.text_field :name, class: "w-full border rounded p-2" %>
+      <%= f.label :full_name, "名前", class: "block font-medium mb-1" %>
+      <%= f.text_field :full_name, class: "w-full border rounded p-2" %>
     </div>
 
     <div class="mb-4">
-      <%= f.label :email, "メールアドレス", class: "block font-medium mb-1" %>
-      <%= f.email_field :email, class: "w-full border rounded p-2" %>
+      <%= f.label :age_group, "年代", class: "block font-medium mb-1" %>
+      <%= f.email_field :age_group, class: "w-full border rounded p-2" %>
     </div>
 
     <div class="text-center">
