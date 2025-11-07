@@ -3,29 +3,38 @@
   <div class="flex flex-col items-center">
   <!-- ログインフォームのカードの様なフレームコンテナ -->
     <div class="bg-white p-8 rounded-lg shadow-lg w-96 max-w-sm">
-<h2>Log in</h2>
+      <h1 class="text-2xl font-bold mb-6 text-center text-gray-800"><%= t('.sign_in') %></h1>
+      <!-- フォーム全体を囲むコンテナ(縦方向の余白（16px相当）を自動で追加) -->
+      <div class="flex flex-col space-y-4">
+      <!-- フォーム -->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+         <!--メールアドレス -->
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", autocomplete: "email" %>
+        </div>
+        <!--パスワード -->
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500", autocomplete: "current-password" %>
+        </div>
+        <!--ログイン保持 -->
+        <% if devise_mapping.rememberable? %>
+          <div class="flex items-center gap-2 mt-3 mb-4 field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <!--ログインボタン -->
+        <div class="actions mb-4">
+          <%= f.submit t('.sign_in'), class: "w-full bg-emerald-500 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-emerald-700 transition-colors duration-200" %>
+        </div>
+      <% end %>
+      </div> 
+      <div class="text-center"> 
+        <%= render "salons/shared/links" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "salons/shared/links" %>
+</div>
