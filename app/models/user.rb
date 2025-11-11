@@ -10,6 +10,7 @@ class User < ApplicationRecord
           # email
           validates :email, presence: true
   has_many :consultations, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   # Ransackが検索を許可する属性を定義
   def self.ransackable_attributes(auth_object = nil)
