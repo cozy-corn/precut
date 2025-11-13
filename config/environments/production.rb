@@ -99,13 +99,14 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.hosts << "www.my-pre-cut.com"
 
-  config.action_mailer.default_url_options = { host: "https://precut.onrender.com/" } # 本番環境のURL
+  config.action_mailer.default_url_options = { host: "https://my-pre-cut.com/" } # 本番環境のURL
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              "smtp.gmail.com",
     port:                 587,
-    domain:               "precut.onrender.com", # 自分のアプリのドメイン
+    domain:               "my-pre-cut.com", # 自分のアプリのドメイン
     user_name:            ENV["MAILER_SENDER"],
     password:             ENV["MAILER_PASSWORD"],
     authentication:       "plain",
