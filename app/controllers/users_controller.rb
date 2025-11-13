@@ -6,7 +6,10 @@ class UsersController < ApplicationController
     before_action :authorize_user!, only: [ :edit, :update ]
 
     def show
-      # @user は set_user でセット済み
+        # @user は set_user でセット済み
+        @events = set_user.events.order(start_time: :asc)
+        # 画面に表示する月の初日を取得（パラメータがなければ当日）
+        @start_date = params.fetch(:start_date, Date.today).to_date
     end
 
     def edit

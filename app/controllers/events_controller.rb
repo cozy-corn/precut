@@ -3,9 +3,16 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[edit update destroy]
 
     def index
-      @events = current_user.events.order(start_time: :asc)
       # 画面に表示する月の初日を取得（パラメータがなければ当日）
       @start_date = params.fetch(:start_date, Date.today).to_date
+      # 基準日の月の初日と最終日を取得
+      first_day = @start_date.beginning_of_month
+      last_day = @start_date.end_of_month
+
+      # ログインユーザーのイベントのうち、表示する月の期間内にあるイベントを抽出
+      @events = current_user.events
+                        .where(start_time: first_day.beginning_of_day..last_day.end_of_day)
+                        .order(start_time: :asc)
     end
 
     def new
