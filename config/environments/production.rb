@@ -100,6 +100,7 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   config.hosts << "www.my-pre-cut.com"
+  config.middleware.use Rack::Attack
 
   config.action_mailer.default_url_options = { host: "https://my-pre-cut.com/" } # 本番環境のURL
   config.action_mailer.delivery_method = :smtp
