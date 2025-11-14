@@ -2,8 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[line]
           # フルネーム
           validates :full_name, presence: true
           validates :full_name, length: { in: 2..50 }
@@ -22,7 +22,37 @@ class User < ApplicationRecord
   # 関連テーブルの検索を許可する属性も定義が必要
   # :userモデルのフルネームで検索するため、こちらも許可
   def self.ransackable_associations(auth_object = nil)
-    # 関連モデル名を文字列の配列で返します
+    # 関連モデル名を文字列の配列で返す
     [ "user" ] # Userモデルを関連付けとして検索することを許可
+  end
+
+  # social_profilesの中身を順番に取り出して、指定したproviderと一致する最初のsocial_profileを返す
+  def social_profile(provider)
+    social_profiles.select { |sp| sp.provider == provider.to_s }.first
+  end
+
+  # omniauthから受け取った情報で、インスタンスの属性を設定する。
+  def set_values(omniauth)
+    # omniauthのproviderとuidのどちらかが既存の値と異なる場合、この時点でreturnしてメソッドを終了する。
+    return if provider.to_s != omniauth["provider"].to_s || uid != omniauth["uid"]
+    # omniauthのcredentialsを取り出す
+    credentials = omniauth["credentials"]
+    # omniauthのinfoを取り出す
+    info = omniauth["info"]
+
+    # さっき取り出したcredentialsからrefresh_tokenを取り出す
+    access_token = credentials["refresh_token"]
+    # さっき取り出したcredentialsからsecretを取り出す
+    access_secret = credentials["secret"]
+    # 最後にcredentialsをjson化しておく
+    credentials = credentials.to_json
+    # さっき取り出したinfoからnameを取り出す(LINEが返してくるLINEのユーザー名)
+    name = info["name"]
+  end
+
+  # 引数で受け取ったraw_infoをjson化してインスタンスのraw_infoに格納する
+  def set_values_by_raw_info(raw_info)
+    self.raw_info = raw_info.to_json
+    self.save!
   end
 end

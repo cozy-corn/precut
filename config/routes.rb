@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     passwords: "salons/passwords", # サロン用にカスタマイズしたパスワードコントローラーを指定
     registrations: "salons/registrations" # サロン用にカスタマイズした登録コントローラーを指定
   }
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: "omniauth_callbacks"
+  }
   get "homes/index"
   resource :user, only: [ :show, :edit, :update ]
   resources :events
