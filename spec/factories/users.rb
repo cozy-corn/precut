@@ -1,0 +1,10 @@
+# ユーザーファクトリ（データ生成の設計図）を定義
+FactoryBot.define do
+  # Userモデルに対応するものとしてテストコード内でのダミーデータを生成する
+  factory :user do
+    # name 属性: "Test User" という値を設定
+    full_name { "テスト" }
+    email { "test@example.com" }
+    password { "password" }
+  end
+end
