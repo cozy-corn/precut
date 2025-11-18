@@ -1,87 +1,100 @@
 import { Html5Qrcode } from "html5-qrcode";
 
-document.addEventListener("DOMContentLoaded", () => {
-  // ページに reader 要素が存在するか確認
-  const readerElement = document.getElementById("reader");
-  if (!readerElement) {
-    // console.log("QR reader element not found. Not running scanner.");
+// グローバルスコープでスキャナーインスタンスを保持するための変数
+let html5QrCodeScanner = null;
+
+// --- 起動処理 ---
+document.addEventListener("turbo:load", () => {
+  // 1. 既にスキャナーが起動中の場合は何もしない（念のため）
+  if (html5QrCodeScanner) {
+    console.warn("Scanner already initialized.");
     return;
   }
   
+  const readerElement = document.getElementById("reader");
   const resultElement = document.getElementById("result");
   const errorElement = document.getElementById("error");
 
-  // エラー/結果表示要素がない場合は警告を出して終了
-  if (!resultElement || !errorElement) {
-    console.error("Result or Error elements missing. Please check scan.html.erb.");
+  if (!readerElement || !resultElement || !errorElement) {
+    // スキャンページではない、または要素がない場合は処理を終了
     return;
   }
 
-  // スキャナーインスタンスの初期化
-  // HTML要素のIDである "reader" を指定
-  const html5QrCodeScanner = new Html5Qrcode("reader");
+  // 2. スキャナーインスタンスの初期化
+  html5QrCodeScanner = new Html5Qrcode("reader");
 
   // 読み取り成功時の処理
   const onScanSuccess = (decodedText, result) => {
     console.log("読み取った内容:", decodedText);
     
-    // スキャンを停止する
-    html5QrCodeScanner.stop().then(() => {
-      console.log("スキャン停止");
-      
-      // 結果の表示を更新
-      resultElement.innerText = `読み取り成功: ${decodedText}`;
-      resultElement.classList.remove('hidden', 'bg-red-100', 'text-red-800');
-      resultElement.classList.add('bg-green-100', 'text-green-800');
-      errorElement.classList.add('hidden');
-
-      // 💡 追加の処理：読み取り完了後、自動でURLにジャンプしたい場合
-      // if (decodedText.startsWith("http")) {
-      //   window.location.href = decodedText;
-      // }
-
-    }).catch(err => {
-      console.error("スキャン停止エラー:", err);
-    });
+    // スキャンを停止
+    if (html5QrCodeScanner) {
+      html5QrCodeScanner.stop().then(() => {
+        console.log("スキャン成功後の停止完了");
+        // 成功後の表示
+        resultElement.innerText = `読み取り成功: ${decodedText}`;
+        resultElement.classList.remove('hidden', 'bg-red-100', 'text-red-800');
+        resultElement.classList.add('bg-green-100', 'text-green-800');
+        errorElement.classList.add('hidden');
+        
+        // 自動ジャンプ処理 
+      if (decodedText.startsWith("http")) {
+       window.location.href = decodedText;
+         }
+      }).catch(err => console.error("スキャン停止エラー:", err));
+    }
   };
 
-  // エラー時（読み取りできなかったフレームごと）の処理
   const onScanFailure = (error) => {
-    // 連続して呼ばれるため、ここでは表示更新を行わないことが多い
-    // console.log("読み取り失敗フレーム:", error);
+    // 連続で呼ばれるため、ここでは何もしない
   };
   
-  // カメラを起動してスキャンを開始
-  // モバイルでの背面カメラ優先設定を使用
+  // 3. カメラを起動してスキャンを開始
   Html5Qrcode.getCameras().then(devices => {
     if (devices && devices.length) {
-      // 背面カメラ (environment) を優先的に探す
       const backCamera = devices.find(d => d.label.toLowerCase().includes('back') || d.label.toLowerCase().includes('environment'));
       const cameraId = backCamera ? backCamera.id : devices[0].id;
 
       html5QrCodeScanner.start(
         cameraId, 
-        { 
-          fps: 10, 
-          qrbox: { width: 250, height: 250 }
-        },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
         onScanSuccess,
         onScanFailure
       )
       .catch(err => {
         console.error("カメラ起動エラー:", err);
-        errorElement.innerText = "エラー：カメラの起動に失敗しました。HTTPS環境であることを確認し、ブラウザの設定でカメラへのアクセスを許可してください。";
+        errorElement.innerText = "エラー：カメラの起動に失敗しました。HTTPS環境とカメラ許可を確認してください。";
         errorElement.classList.remove('hidden');
         resultElement.classList.add('hidden');
+        html5QrCodeScanner = null; // エラー時もインスタンスをクリア
       });
     } else {
-      errorElement.innerText = "エラー：デバイスに利用可能なカメラが見つかりません。";
+      errorElement.innerText = "エラー：利用可能なカメラが見つかりません。";
       errorElement.classList.remove('hidden');
+      html5QrCodeScanner = null; // カメラなし時もインスタンスをクリア
     }
   }).catch(err => {
     console.error("カメラデバイス取得エラー:", err);
     errorElement.innerText = "エラー：カメラデバイスのリストを取得できませんでした。";
     errorElement.classList.remove('hidden');
+    html5QrCodeScanner = null; // エラー時もインスタンスをクリア
   });
+});
+
+
+// --- 停止処理（Turbo専用）---
+// ユーザーがこのページから他のページへ移動する直前に発火するイベント
+document.addEventListener("turbo:before-cache", () => {
+  if (html5QrCodeScanner) {
+    // カメラがまだ動いている（スキャン成功で停止していない）場合
+    html5QrCodeScanner.stop().then(() => {
+      console.log("Turbo移動: スキャナーを正常に停止しました。");
+      html5QrCodeScanner = null; // インスタンスをクリア
+    }).catch(err => {
+      // 既に停止している場合などに発生するエラー。無視してOK。
+      console.warn("Turbo移動: スキャナー停止中にエラーが発生しましたが、無視します。", err);
+      html5QrCodeScanner = null; // インスタンスをクリア
+    });
+  }
 });
 
