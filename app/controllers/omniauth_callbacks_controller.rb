@@ -27,7 +27,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # ログイン後のflash messageとリダイレクト先を設定
       flash[:notice] = "ログインしました"
       # ここのリダイレクト先は後で自分のルーティングに応じて変更する
-      redirect_to expendable_items_path
+      redirect_to root_path
     end
 
     # ダミーのemailアドレスを作成するメソッド
