@@ -21,7 +21,8 @@
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">使い方ガイド</a></li>
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">プライバシーポリシー</a></li>
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">利用規約</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">お問い合わせ</a></li>
+            <%= link_to "お問い合わせ", "https://forms.gle/ry5XdtHmWuSGbrZcA", 
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
             <li class="border-t border-gray-600 my-1"></li>
             <li><%= link_to "ログアウト", destroy_salon_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
                   class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md text-red-400 font-semibold" %></li>
