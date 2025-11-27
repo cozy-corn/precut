@@ -22,7 +22,7 @@ module ApplicationHelper
       canonical: request.original_url,
       og: {
         title: "MyApp",
-        description: "This is the best app ever.",
+        description: "美容室のための事前カウンセリングアプリ",
         type: "website",
         url: request.original_url,
         image: image_url("ogp.png"),
