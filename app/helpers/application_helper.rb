@@ -21,7 +21,7 @@ module ApplicationHelper
       keywords: "美容室,カウンセリング,事前共有,美容師,ヘアスタイル,カルテ,予約,新規",
       canonical: request.original_url,
       og: {
-        title: "MyApp",
+        title: "precut",
         description: "美容室のための事前カウンセリングアプリ",
         type: "website",
         url: request.original_url,
