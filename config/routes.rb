@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
 
 
-  # Consultationの詳細（show）ページへのルートを追加
+  # Consultationの詳細（show）ページへのルート
   resources :consultations, only: [ :show ] do
     get "", on: :member, action: :show, constraints: { id: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
   end
@@ -49,4 +49,11 @@ Rails.application.routes.draw do
     end
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  resource :static, only: [] do
+    collection do
+    get "terms_of_service"
+    get "privacy_policy"
+    end
+  end
 end

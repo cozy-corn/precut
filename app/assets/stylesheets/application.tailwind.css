@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer base {
+  h1 {
+    @apply text-3xl font-bold mb-6 text-center text-gray-800;
+  }
+}
 /*
 
 @layer components {

@@ -34,7 +34,8 @@
           <% end %>
             <!-- 共通 -->
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">使い方ガイド</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">プライバシーポリシー</a></li>
+            <li><%= link_to "プライバシーポリシー", privacy_policy_static_path, 
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
             <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">利用規約</a></li>
             <%= link_to "お問い合わせ", "https://forms.gle/ry5XdtHmWuSGbrZcA", 
                   class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
@@ -43,4 +44,3 @@
     </nav>
   </div>
 </header>
-
