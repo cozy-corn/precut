@@ -1,13 +1,23 @@
-<%# ユーザー側リンク %>
-<%- if controller_name != 'sessions' %>
-  <%= link_to t('.already_signed_in'), new_session_path(resource_name), class: "text-blue-500 hover:underline" %><br />
-<% end %>
-
 <%# パスワードリセットリンク %>
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <p class="mb-2">
   <%= link_to t('.forgot_your_password'), new_password_path(resource_name), class: "text-blue-500 hover:underline" %>
   </p>
+<% end %>
+
+ <%#  LINEログインリンク %>
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= button_to "#{OmniAuth::Utils.camelize(provider)}でログイン",
+        omniauth_authorize_path(resource_name, provider),
+        class: "w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-green-600 transition-colors duration-200",
+        data: { turbo: false } %><br />
+  <% end %>
+<% end %>
+
+<%# ユーザー側リンク %>
+<%- if controller_name != 'sessions' %>
+  <%= link_to t('.already_signed_in'), new_session_path(resource_name), class: "text-blue-500 hover:underline" %><br />
 <% end %>
 
  <%#  新規登録リンク %>
@@ -26,8 +36,3 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
-  <% end %>
-<% end %>

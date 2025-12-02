@@ -2,6 +2,8 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 
+import { Application } from '@hotwired/stimulus' 
+
 import "./qr_reader"
 import { Autocomplete } from 'stimulus-autocomplete' //コンポーネントを読み込むための記述
 
