@@ -9,8 +9,8 @@
     
     <%# 検索フィールド本体。入力値の保持もここで対応 %>
     <%= f.search_field :user_full_name_cont, 
-      class: 'form-control w-full p-2 text-gray-900 placeholder-white border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500', 
-      placeholder: 'お客様のお名前を検索 (オートコンプリート)',
+      class: 'form-control w-full p-2 text-gray-800 placeholder-white border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500', 
+      placeholder: 'お客様のお名前を検索',
       value: (params[:q] && params[:q][:user_full_name_cont]),
       data: { autocomplete_target: 'input' } %>
     <%= f.hidden_field :user_full_name, data: { autocomplete_target: 'hidden' } %>
