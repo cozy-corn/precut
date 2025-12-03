@@ -1,6 +1,6 @@
 <% sharing = @consultation.consultation_sharing %>
 
-<div class="p-4 border rounded-lg bg-white shadow-sm">
+<div class="p-4 border rounded-lg bg-white shadow-sm max-w-3xl mx-auto">
   <% if sharing.present? %>
     <%# 共有データがある場合（QRコード表示） %>
     <%# shared_consultation_url は config/routes.rb で定義したパスヘルパー %>
@@ -10,7 +10,7 @@
       <p class="font-bold text-lg text-green-700 mb-2">スキャンしてカルテを共有</p>
       
       <%# --- QRコードの描画エリア --- %>
-      <div class="my-4 inline-block p-2 border-4 border-gray-200">
+      <div class="my-4 inline-block p-2 border-4 border-gray-200 max-w-3xl mx-auto">
         <%= qrcode (shared_url) %>
       </div>
       <%# --- 描画エリア終了 --- %>
