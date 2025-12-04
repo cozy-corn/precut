@@ -3,33 +3,33 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "バリデーションチェック" do
     context "有効な値の場合" do
-      it "設定したすべてのバリデーションが機能しているか" do
+      it "バリテーションを通過すること" do
         user = build(:user)
         expect(user).to be_valid
         expect(user.errors).to be_empty
       end
     end
 
-    context "メールアドレスがない場合" do
+    context "メールアドレスが空欄の場合" do
       it "バリデーションに失敗すること" do
         user = build(:user, email: nil)
-        expect(user).not_to be_valid
+        expect(user).to be_invalid
         expect(user.errors[:email]).not_to be_empty
       end
     end
 
-    context "名前がない場合" do
+    context "名前が空欄の場合" do
       it "バリデーションに失敗すること" do
         user = build(:user, full_name: nil)
-        expect(user).not_to be_valid
+        expect(user).to be_invalid
         expect(user.errors[:full_name]).not_to be_empty
       end
     end
 
     context "パスワードのバリテーション" do
-      it "パスワードがない場合失敗すること" do
+      it "パスワードが空欄の場合失敗すること" do
         user = build(:user, password: nil)
-        expect(user).not_to be_valid
+        expect(user).to be_invalid
         expect(user.errors[:password]).not_to be_empty
       end
 

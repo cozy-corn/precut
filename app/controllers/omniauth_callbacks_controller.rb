@@ -17,7 +17,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           # 三項演算子　認証情報の[info][email]が存在する場合その値を代入　そうでない場合認証情報の中身を使って、一意のダミーemailアドレスを作っている
           email = @omniauth["info"]["email"] ? @omniauth["info"]["email"] : "#{@omniauth["uid"]}-#{@omniauth["provider"]}@example.com"
           # current_userが存在するならそのまま代入、しないならその場で認証情報から新しいユーザーを作成している。
-          @profile = current_user || User.create!(provider: @omniauth["provider"], uid: @omniauth["uid"], email: email, name: @omniauth["info"]["name"], password: Devise.friendly_token[0, 20])
+          @profile = current_user || User.create!(provider: @omniauth["provider"], uid: @omniauth["uid"], email: email, full_name: @omniauth["info"]["name"], password: Devise.friendly_token[0, 20])
         end
         # set_values(@omniauth)はuserモデルで定義されたメソッド
         @profile.set_values(@omniauth)

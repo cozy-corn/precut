@@ -47,7 +47,7 @@ class User < ApplicationRecord
     # 最後にcredentialsをjson化しておく
     credentials = credentials.to_json
     # さっき取り出したinfoからnameを取り出す(LINEが返してくるLINEのユーザー名)
-    name = info["name"]
+    self.full_name = info["name"]
   end
 
   # 引数で受け取ったraw_infoをjson化してインスタンスのraw_infoに格納する
