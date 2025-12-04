@@ -20,6 +20,14 @@
       <div class="text-center mt-4">
         <%= link_to "プロフィールを編集", edit_user_path, class: "inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" %>
       </div>
+
+      <div class="text-center mt-4">
+         <%= button_to "LINEで認証",
+          user_line_omniauth_authorize_path,
+          method: :post,
+          class: "inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition",
+          data: { turbo: false } %>
+      </div>
     </section>
 
     <!-- カレンダーセクション -->
@@ -32,7 +40,7 @@
             </p>
           <% end %>
         <% end %>
-      <%= link_to "予約日を作成する", new_event_path, class: "inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" %>
+      <%= link_to "予約日を作成する", new_event_path, class: "inline-block bg-blue-500 text-white px-4 py-2 mt-6 rounded hover:bg-blue-600 transition" %>
     </section>
   </div>
 </div>

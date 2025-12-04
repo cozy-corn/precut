@@ -2,9 +2,10 @@
 FactoryBot.define do
   # Userモデルに対応するものとしてテストコード内でのダミーデータを生成する
   factory :user do
-    # name 属性: "Test User" という値を設定
+    # name 属性: "テスト" という値を設定
     full_name { "テスト" }
     email { "test@example.com" }
     password { "password" }
+    password_confirmation { "password" }
   end
 end
