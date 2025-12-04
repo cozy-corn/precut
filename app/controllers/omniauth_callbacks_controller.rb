@@ -1,7 +1,11 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    def line
+  def line
+    if user_signed_in?
+      connect_line_account
+    else
       basic_action
     end
+  end
 
     private
 
@@ -30,8 +34,21 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to root_path
     end
 
-    # ダミーのemailアドレスを作成するメソッド
-    def fake_email(uid, provider)
-      "#{auth.uid}-#{auth.provider}@example.com"
+    # LINEアカウントを現在のユーザーに紐付けるメソッド
+    def connect_line_account
+      @omniauth = request.env["omniauth.auth"]
+
+      unless @omniauth && @omniauth["provider"].present? && @omniauth["uid"].present?
+        flash[:alert] = "LINE連携に失敗しました"
+        return redirect_to user_path
+      end
+
+      if User.exists?(provider: @omniauth["provider"], uid: @omniauth["uid"])
+        flash[:alert] = "このLINEアカウントは既に登録されています"
+      else
+        current_user.update!(provider: @omniauth["provider"], uid: @omniauth["uid"])
+        flash[:notice] = "LINEアカウントを紐付けました"
+      end
+      redirect_to user_path
     end
 end

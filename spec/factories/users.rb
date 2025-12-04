@@ -6,5 +6,6 @@ FactoryBot.define do
     full_name { "テスト" }
     email { "test@example.com" }
     password { "password" }
+    password_confirmation { "password" }
   end
 end

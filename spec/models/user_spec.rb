@@ -49,7 +49,7 @@ RSpec.describe User, type: :model do
     context "名前が短すぎる場合" do
       it "バリデーションに失敗すること" do
         user = build(:user, full_name: "a")
-        expect(user).not_to be_valid
+        expect(user).to be_invalid
         expect(user.errors[:full_name]).not_to be_empty
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe User, type: :model do
       it "uniqueのバリデーションが機能して失敗すること" do
         user = create(:user)
         duplicate_user = build(:user, email: user.email)
-        expect(duplicate_user).not_to be_valid
+        expect(duplicate_user).to be_invalid
         expect(duplicate_user.errors[:email]).not_to be_empty
       end
     end
