@@ -23,7 +23,12 @@
 
   <body class="min-h-screen bg-gray-50">
     <!-- 共通ヘッダー -->
-    <%= render "shared/header" %>
+    <% if salon_signed_in? %>
+      <%= render 'salons/shared/header' %>
+    <% else %>
+      <%= render "shared/header" %>
+    <% end %>
+
     <%= render 'shared/flash_messages' %>
     <!-- 各画面の中身 -->
     <main class="container mx-auto mt-28 px-5">

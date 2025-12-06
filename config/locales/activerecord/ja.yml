@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       salon: サロン
+      event: 予約日
     attributes:
       user:
         full_name: "氏名"
@@ -14,6 +15,10 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
+      event:
+        title: "タイトル"
+        start_time: "開始時間"
+        end_time: "終了時間"
     errors:
       messages:
         blank: "を入力してください"
@@ -38,4 +43,3 @@ ja:
               too_short: "は%{count}文字以上で入力してください"
             password_confirmation:
               confirmation: "とパスワードの入力が一致しません"
-  
