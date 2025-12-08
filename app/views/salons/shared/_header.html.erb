@@ -16,7 +16,8 @@
         
         <ul class="absolute top-full right-0 mt-3 w-52 p-2 shadow-xl bg-gray-800/90 backdrop-blur-sm rounded-lg z-10 text-white space-y-1">
           <!-- サロン側 -->
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-700/80 rounded-md">プロフィールを編集</a></li>
+            <li><%= link_to "プロフィール", salons_profile_path, 
+                  class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
             <li><%= link_to "QRコード読み取り", scan_salons_consultations_path, class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
             <li><%= link_to "プライバシーポリシー", privacy_policy_static_path, 
                   class: "block px-4 py-2 hover:bg-gray-700/80 rounded-md" %></li>
