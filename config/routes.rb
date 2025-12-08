@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # ルートとdeviseの設定
   root "homes#index"
   devise_for :salons, controllers: {
     sessions: "salons/sessions", # サロン用にカスタマイズしたセッションコントローラーを指定
@@ -8,46 +9,44 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: "omniauth_callbacks"
   }
-  get "homes/index"
+
+  # ユーザープロフィールとイベント用のルーティング
   resource :user, only: [ :show, :edit, :update ]
   resources :events
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # ヘルスチェック用ルート
   get "up" => "rails/health#show", as: :rails_health_check
-
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
-
-
   # Consultationの詳細（show）ページへのルート
-  resources :consultations, only: [ :show ] do
+  resources :consultations, only: [ :index, :show ] do
+    # 1. UUIDを使ったアクセス用（例: /consultations/550e8400-e29b-41d4-a716-446655440000）
     get "", on: :member, action: :show, constraints: { id: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
-  end
-  resources :consultations, only: [ :index ]
-  resources :consultations do
+
     member do
       get :recreate # /consultations/:id/recreate 再作成用ルート
       post :recreate # /consultations/:id/recreate 再作成保存用ルート
     end
   end
-  resources :answers, only: [ :new, :create ]
 
+  # 2. 新規相談フォームと作成用ルート
+  resources :answers, only: [ :new, :create ]
   resources :consultation_sharings, only: [ :create ]
   # 3. トークンを使ったアクセス用（例: /shared/abc12345）
   get "shared/:token", to: "consultations#show_shared", as: :shared_consultation
+
   # サロン側のルーティング
   namespace :salons do
+    resource :profile, only: [ :show, :edit, :update ]
+
     resources :consultations, only: [ :index, :show, :update ] do
       get :scan, on: :collection # /salons/consultations/scan　QRコード読み取りページ
       get :autocomplete, on: :collection # /salons/consultations/autocomplete ユーザー検索のオートコンプリート用
     end
   end
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   resource :static, only: [] do

@@ -1,0 +1,24 @@
+<div class="my-container">
+  <div class="max-w-4xl mx-auto space-y-10">
+    <!-- タイトル -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 border-b border-gray-200 pb-4">
+      プロフィール
+    </h1>
+
+    <!-- ユーザー情報カード -->
+    <section class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">
+        ユーザー情報
+      </h2>
+
+      <div class="space-y-2 text-gray-700">
+        <p><strong>サロン名：</strong><%= @salon.salon_name %></p>
+        <p><strong>メールアドレス：</strong><%= @salon.email %></p>
+      </div>
+
+      <div class="text-center mt-4">
+        <%= link_to "プロフィールを編集", edit_salons_profile_path, class: "inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" %>
+      </div>
+    </section>
+  </div>
+</div>
