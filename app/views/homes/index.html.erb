@@ -1,50 +1,151 @@
-<body class="my-container">
-
-  <main class="flex-1 flex flex-col items-center mt-12 px-4 text-center">
-    <h1 class="mb-2">来店前に"なりたい"を共有できる</h1>
-    <p class="text-gray-600 mb-8">美容室のための事前カウンセリングWebアプリ</p>
-
-    <div class="grid md:grid-cols-3 gap-4 w-full px-4 md:px-0">
-      <div class="flex items-start bg-white p-6 rounded-xl shadow">
-        <div class="text-purple-500 mr-3 text-4xl">💬</div>
-        <p class="text-left">
-          <span class="font-semibold text-xl">チャット形式で簡単入力</span><br>
-          会話するように気軽に要望を伝えられます
-        </p>
-      </div>
-
-      <div class="flex items-start bg-white p-6 rounded-xl shadow">
-        <div class="text-yellow-500 mr-3 text-4xl">⏱</div>
-        <p class="text-left">
-          <span class="font-semibold text-xl">事前共有で時短カウンセリング</span><br>
-          来店前に要望を共有して当日をスムーズに
-        </p>
-      </div>
-
-      <div class="flex items-start bg-white p-6 rounded-xl shadow">
-        <div class="text-green-500 mr-3 text-4xl">🔗</div>
-        <p class="text-left">
-          <span class="font-semibold text-xl">QRコードで即座に共有</span><br>
-          美容師さんにURL、QRをLINEやSNSで情報を送信
-        </p>
-      </div>
-    </div>
-
-    <div class="mt-8 space-y-4 w-full max-w-md mx-auto">
-      <% if user_signed_in? %>
-        <%= link_to "カウンセリングを始める", new_answer_path, class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
-      <% else %>
-        <%= link_to "カウンセリングを始める", new_user_session_path, class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
-      <% end %>
-
-      <% if salon_signed_in? %>
-        <%= link_to "美容師専用ページ", salons_consultations_path,
-            class: "block w-full text-center bg-green-500 text-white font-semibold py-3 rounded opacity-70 cursor-not-allowed" %>
-      <% else %>
-        <%= link_to "美容師専用ページ", new_salon_session_path,
-            class: "block w-full text-center bg-green-500 text-white font-semibold py-3 rounded opacity-70 cursor-not-allowed" %>
-      <% end %>
-      <p class="text-sm text-gray-500">美容師・サロン関係者の方はこちら（準備中）</p>
-    </div>
+<div class="my-container">
+  <main class="flex-1 flex flex-col items-center mt-6 px-4 text-center">
+    <h1 class>髪の悩みを「引き継ぐ」デジタルカルテ</h1>
+    <p class="text-gray-600 mb-8">毎回同じ説明は不要です。 来店前にお客様の髪の履歴と、要望を共有して当日サロンでの施術をスムーズに。来店前に"なりたい"を共有できるサービスです。</p>
   </main>
-</body>
+</div>
+
+<section id="user_guide" class="py-16 shadow-md">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">
+      使い方
+    </h2>
+
+    <div class="flex flex-col space-y-8 text-center"> 
+      <div class="md:flex md:items-start p-6 bg-white rounded-lg shadow-md">
+        <div class="md:w-1/12 flex-shrink-0">
+          <span class="text-4xl font-extrabold text-blue-500">1</span>
+        </div>
+        <div class="md:w-11/12 md:pl-8">
+          <h3 class="text-xl font-semibold mb-2">アカウント作成とログイン</h3>
+          <p class="text-gray-700">
+            メールアドレスまたはLINEで簡単にアカウントを作成、ログインします。
+          </p>
+        </div>
+      </div>
+
+      <div class="md:flex md:items-start p-6 bg-white rounded-lg shadow-md">
+        <div class="md:w-1/12 flex-shrink-0">
+          <span class="text-4xl font-extrabold text-blue-500">2</span>
+        </div>
+        <div class="md:w-11/12 md:pl-8">
+          <h3 class="text-xl font-semibold mb-2">相談フォームに回答</h3>
+          <p class="text-gray-700">
+            初めてのご利用時には、現在の髪の悩みや希望、過去の施術履歴などをチャット形式のフォームに入力します。
+          </p>
+        </div>
+      </div>
+      
+      <div class="md:flex md:items-start p-6 bg-white rounded-lg shadow-md">
+        <div class="md:w-1/12 flex-shrink-0">
+          <span class="text-4xl font-extrabold text-blue-500">3</span>
+        </div>
+        <div class="md:w-11/12 md:pl-8">
+          <h3 class="text-xl font-semibold mb-2">QRコードを作成、共有</h3>
+          <p class="text-gray-700">
+             作成したURL、QRをLINEやSNSで美容師さんに送信し、共有完了です。
+          </p>
+        </div>
+      </div>
+
+      <div class="md:flex md:items-start p-6 bg-white rounded-lg shadow-md">
+        <div class="md:w-1/12 flex-shrink-0">
+          <span class="text-4xl font-extrabold text-blue-500">4</span>
+        </div>
+        <div class="md:w-11/12 md:pl-8">
+          <h3 class="text-xl font-semibold mb-2">カウンセリング履歴で過去の履歴を確認</h3>
+          <p class="text-gray-700">
+             過去に作成したカウンセリング履歴はいつでも確認できます。
+          </p>
+        </div>
+      </div>
+
+      <div class="md:flex md:items-start p-6 bg-white rounded-lg shadow-md">
+        <div class="md:w-1/12 flex-shrink-0">
+          <span class="text-4xl font-extrabold text-blue-500">5</span>
+        </div>
+        <div class="md:w-11/12 md:pl-8">
+          <h3 class="text-xl font-semibold mb-2">過去の履歴を使って新しいカルテを作成</h3>
+          <p class="text-gray-700">
+             過去に作成したカウンセリング履歴を元に新しいカルテを作成できます。
+          </p>
+        </div>
+      </div>
+
+      <div class="md:flex md:items-start p-6 bg-white rounded-lg shadow-md">
+        <div class="md:w-1/12 flex-shrink-0">
+          <span class="text-4xl font-extrabold text-blue-500">6</span>
+        </div>
+        <div class="md:w-11/12 md:pl-8">
+          <h3 class="text-xl font-semibold mb-2">予約日を登録して通知</h3>
+          <p class="text-gray-700">
+             LINEで登録した方はマイページから予約日を設定すると前日の夜9時にLINEで通知を送ることができます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="salon_guide" class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mt-4 p-6 text-gray-800">
+      美容師さん向け使い方
+    </h2>
+    <p class="text-gray-600 mb-8">送られたお客様のQRコードに紐ずくカルテは30日以内は通常のカメラで確認出来ます。ログインしたアカウントでカルテをスキャンする事で30日以降も確認することができます。</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+      <div class="p-6 border-t-4 border-indigo-500 rounded-lg shadow-xl">
+        <span class="text-4xl font-extrabold text-green-500 mb-4 block">1</span>
+        <h3 class="text-xl font-semibold mb-3">アカウント作成とログイン</h3>
+        <p class="text-gray-600">
+          アカウント作成、ログインすると以下の２つの機能が利用可能になります。<br>
+        </p>
+      </div>
+
+      <div class="p-6 border-t-4 border-indigo-500 rounded-lg shadow-xl">
+        <span class="text-4xl font-extrabold text-green-500 mb-4 block">2</span>
+        <h3 class="text-xl font-semibold mb-3">送られたお客様のQRコードをスキャン</h3>
+        <p class="text-gray-600">
+          ログインした状態でお客様から送られたQRコードを読み取ると、QRコードに紐付いたカウンセリング履歴があなたのアカウントに紐づけられます。
+        </p>
+      </div>
+
+      <div class="p-6 border-t-4 border-indigo-500 rounded-lg shadow-xl">
+        <span class="text-4xl font-extrabold text-green-500 mb-4 block">3</span>
+        <h3 class="text-xl font-semibold mb-3">過去のお客様のカウンセリング履歴を確認</h3>
+        <p class="text-gray-600">
+          あなたのアカウントに紐づいたお客様のカウンセリング履歴が、いつでも確認できます。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-8 space-y-4 w-full max-w-md mx-auto text-center mb-4">
+    
+  <%# Userがログインしているか、誰もログインしていない場合 %>
+  <% if user_signed_in? || (!user_signed_in? && !salon_signed_in?) %>
+      
+    <%# ログインしている場合は直接カウンセリングページへ、そうでない場合はログインページへ %>
+    <% path = user_signed_in? ? new_answer_path : new_user_session_path %>
+      
+    <%= link_to "カウンセリングを始める", path, 
+        class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
+  <% end %>
+
+  <%# Salonがログインしているか、誰もログインしていない場合に表示 %>
+  <% if salon_signed_in? || (!user_signed_in? && !salon_signed_in?) %>
+      
+    <%# ログインしている場合は直接Salon専用ページへ、そうでない場合はログインページへ %>
+    <% path = salon_signed_in? ? salons_consultations_path : new_salon_session_path %>
+      
+    <%= link_to "美容師専用ページ", path,
+        class: "block w-full text-center bg-green-500 text-white font-semibold py-3 rounded hover:bg-green-600" %>
+      
+    <%# 誰もログインしていない場合のみ、補足テキストを表示 %>
+    <% unless user_signed_in? || salon_signed_in? %>
+      <p class="text-sm text-gray-500">美容師・サロン関係者の方はこちら</p>
+    <% end %>
+  <% end %>
+ </div>
