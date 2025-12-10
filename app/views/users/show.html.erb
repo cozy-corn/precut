@@ -4,41 +4,36 @@
     <h1 class="text-3xl font-bold text-center text-gray-800 border-b border-gray-200 pb-4">
       マイページ
     </h1>
-
     <!-- ユーザー情報カード -->
     <section class="bg-white shadow-md rounded-lg p-6">
       <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">
         ユーザー情報
       </h2>
-
       <div class="space-y-2 text-gray-700">
         <p><strong>氏名：</strong><%= @user.full_name %></p>
         <p><strong>年代：</strong><%= @user.age_group %></p>
       </div>
-
       <div class="text-center mt-4">
         <%= link_to "プロフィールを編集", edit_user_path, class: "inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" %>
       </div>
-
       <div class="text-center mt-4">
-         <%= button_to "LINEで認証",
+        <%= button_to "LINEで認証",
           user_line_omniauth_authorize_path,
           method: :post,
           class: "inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition",
           data: { turbo: false } %>
       </div>
     </section>
-
     <!-- カレンダーセクション -->
     <section class="bg-white shadow-md rounded-lg p-6 mb-4 text-center">
       <h3 class="text-3xl font-bold text-gray-800 border-b border-gray-200 pb-4">予約日</h3>
-        <%= month_calendar events: @events do |date, events| %>
-          <% events.each do |event| %>
-            <p class="text-xs text-blue-500 truncate hover:underline">
-              <%= link_to event.title, event %>
-            </p>
-          <% end %>
+      <%= month_calendar events: @events do |date, events| %>
+        <% events.each do |event| %>
+          <p class="text-xs text-blue-500 truncate hover:underline">
+            <%= link_to event.title, event %>
+          </p>
         <% end %>
+      <% end %>
       <%= link_to "予約日を入力する", new_event_path, class: "inline-block bg-blue-500 text-white px-4 py-2 mt-6 rounded hover:bg-blue-600" %>
     </section>
   </div>

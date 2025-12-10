@@ -36,5 +36,5 @@ RSpec.configure do |config|
   # Wardenのテストモードを有効化
   Warden.test_mode!
   config.after(:each) { Warden.test_reset! }
-  config.include OmniauthMacros
+  # config.include OmniauthMacros
 end

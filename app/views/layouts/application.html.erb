@@ -6,9 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
     <link rel="manifest" href="/manifest.json">
     <!-- ブラウザのタブなどに表示される 小さなアイコン (ファビコン) を指定 -->
     <link rel="icon" href="/icon.png" type="image/png">
@@ -17,10 +15,8 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-
     <%= display_meta_tags(default_meta_tags) %>
   </head>
-
   <body class="min-h-screen bg-gray-50">
     <!-- 共通ヘッダー -->
     <% if salon_signed_in? %>
@@ -28,7 +24,6 @@
     <% else %>
       <%= render "shared/header" %>
     <% end %>
-
     <%= render 'shared/flash_messages' %>
     <!-- 各画面の中身 -->
     <main class="container mx-auto mt-28 px-5">

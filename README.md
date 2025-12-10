@@ -122,7 +122,7 @@ MVPリリース時
 
 ---
 
-* 使用技術：	
+* 使用技術：
     * フロントエンド	Rails 7.2.1, @hotwired/turbo-rails"TailwindCSS
     * バックエンド	Rails 7.2.1 (Ruby 3.2.2 )
     * インフラ	Render.com
