@@ -12,22 +12,18 @@
       <span class="font-semibold">作成日時:</span> <%= @consultation.created_at.strftime("%Y年%m月%d日") %>
     </p>
   </div>
-
   <div class="space-y-6">
     <% @answers.each.with_index(1) do |answer, index| %>
       <div class="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50 rounded-r-md">
-        
         <p class="text-base font-bold text-gray-900 mb-1">
           Q<%= index %>: <%= answer.question %>
         </p>
-
         <div class="p-3 bg-white border border-gray-200 rounded-md shadow-sm">
           <p class="text-gray-700 whitespace-pre-wrap"><%= answer.answer %></p>
         </div>
       </div>
     <% end %>
   </div>
-
   <%# ボタンを追加 %>
   <div class="mb-4 flex justify-end">
     <%#  status が 'archived' でない場合のみボタンを表示 %>

@@ -10,7 +10,7 @@ document.addEventListener("turbo:load", () => {
     console.warn("Scanner already initialized.");
     return;
   }
-  
+
   const readerElement = document.getElementById("reader");
   const resultElement = document.getElementById("result");
   const errorElement = document.getElementById("error");
@@ -26,7 +26,7 @@ document.addEventListener("turbo:load", () => {
   // 読み取り成功時の処理
   const onScanSuccess = (decodedText, result) => {
     console.log("読み取った内容:", decodedText);
-    
+
     // スキャンを停止
     if (html5QrCodeScanner) {
       html5QrCodeScanner.stop().then(() => {
@@ -36,8 +36,8 @@ document.addEventListener("turbo:load", () => {
         resultElement.classList.remove('hidden', 'bg-red-100', 'text-red-800');
         resultElement.classList.add('bg-green-100', 'text-green-800');
         errorElement.classList.add('hidden');
-        
-        // 自動ジャンプ処理 
+
+       // 自動ジャンプ処理
       if (decodedText.startsWith("http")) {
        window.location.href = decodedText;
          }
@@ -48,7 +48,7 @@ document.addEventListener("turbo:load", () => {
   const onScanFailure = (error) => {
     // 連続で呼ばれるため、ここでは何もしない
   };
-  
+
   // 3. カメラを起動してスキャンを開始
   Html5Qrcode.getCameras().then(devices => {
     if (devices && devices.length) {

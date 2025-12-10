@@ -1,10 +1,8 @@
 <div class="h-full w-full bg-gray-50 flex flex-col">
   <%# メインコンテンツをラップする要素を追加し、max-w-lgを適用します %>
   <main class="container mx-auto max-w-lg p-4 pt-4 pb-24 flex-grow flex flex-col justify-center w-full">
-    
     <%# 1. 画面全体のタイトル %>
     <h1 class="text-3xl font-extrabold text-gray-800 mt-4 mb-6 text-center tracking-tight">カウンセリング履歴</h1>
-
     <%# 2. ユーザー情報のセクション %>
     <section class="p-4 bg-white rounded-xl shadow-md border border-gray-100 text-center">
       <div class="w-16 h-16 mx-auto mb-2 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-2xl border-4 border-indigo-200">
@@ -18,9 +16,7 @@
         登録日: <%= current_user.created_at.strftime("%Y年%-m月%-d日") %>
       </p>
     </section>
-
     <h3 class="text-lg font-bold text-gray-800 mt-8 mb-4 border-b pb-2">過去のカウンセリング記録</h3>
-
     <%# 3. 個別のカウンセリング履歴のループ表示 %>
     <% if @consultations.empty? %>
       <p class="text-center text-gray-500 mt-12 p-6 bg-white rounded-lg shadow-inner">
@@ -30,7 +26,6 @@
       <div class="space-y-4">
         <% @consultations.each_with_index do |consultation, index| %>
           <a href="<%= consultation_path(consultation) %>" class="block bg-white p-4 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.01] border-l-4 <%= index == 0 ? 'border-emerald-500' : 'border-gray-200' %> flex justify-between items-center">
-            
             <div class="flex-grow">
               <div class="flex items-center mb-1 space-x-2">
                 <!-- ステータス（最新、完了など） -->
@@ -42,13 +37,11 @@
                   <%= consultation.created_at.strftime("%Y年%-m月%-d日") %>
                 </span>
               </div>
-              
               <!-- カウンセリングのタイトル/概要 -->
               <div class="text-gray-800 font-bold mb-1">
                 カウンセリング #<%= consultation.id %>
               </div>
             </div>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400 ml-4 flex-shrink-0">
               <path d="M9 18l6-6-6-6"></path>
             </svg>
@@ -56,9 +49,7 @@
         <% end %>
       </div>
     <% end %>
-
   </main>
-
   <!-- 4. フッターボタン (新しいカウンセリングを作成) -->
   <div class="fixed inset-x-0 bottom-0 p-4 bg-white shadow-[0_-4px_6px_-1px_rgb(0_0_0_/_0.1)] border-t border-gray-100">
     <a href="<%= new_answer_path %>" class="w-full inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-bold rounded-xl shadow-sm text-white bg-blue-500 hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
@@ -66,4 +57,3 @@
     </a>
   </div>
 </div>
-
