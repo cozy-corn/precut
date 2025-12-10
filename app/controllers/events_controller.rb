@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event, only: %i[edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy]
 
     def index
       # 画面に表示する月の初日を取得（パラメータがなければ当日）
@@ -14,6 +14,8 @@ class EventsController < ApplicationController
                         .where(start_time: first_day.beginning_of_day..last_day.end_of_day)
                         .order(start_time: :asc)
     end
+
+    def show; end
 
     def new
       @event = current_user.events.new(start_time: params[:date])
@@ -32,7 +34,7 @@ class EventsController < ApplicationController
 
     def update
       if @event.update(event_params)
-        redirect_to events_path, notice: "予定を更新しました。"
+        redirect_to user_path, notice: "予定を更新しました。"
       else
         render :edit, status: :unprocessable_entity
       end
@@ -40,7 +42,7 @@ class EventsController < ApplicationController
 
     def destroy
       @event.destroy
-      redirect_to events_path, notice: "予定を削除しました。"
+      redirect_to user_path, notice: "予定を削除しました。"
     end
 
     private
