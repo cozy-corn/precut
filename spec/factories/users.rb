@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :user do
     # name 属性: "テスト" という値を設定
     full_name { "テスト" }
-    email { "test@example.com" }
+    email { |n| "test#{n}@example.com" }
     password { "password" }
     password_confirmation { "password" }
   end
