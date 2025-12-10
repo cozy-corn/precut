@@ -28,9 +28,9 @@
   <div class="mb-4 flex justify-end">
     <%#  status が 'archived' でない場合のみボタンを表示 %>
     <% if @consultation.status != 'archived' %>
-      <%= button_to "確認済みにする", 
-                    salons_consultation_path(@consultation), 
-                    method: :patch, 
+      <%= button_to "確認済みにする",
+                    salons_consultation_path(@consultation),
+                    method: :patch,
                     params: { consultation: { status: 'archived' } },
                     data: { confirm: "このカルテを「確認済」にしますか？" },
                     class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200 shadow-md" %>

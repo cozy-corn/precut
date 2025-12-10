@@ -79,7 +79,7 @@
   <% if user_signed_in? || (!user_signed_in? && !salon_signed_in?) %>
     <%# ログインしている場合は直接カウンセリングページへ、そうでない場合はログインページへ %>
     <% path = user_signed_in? ? new_answer_path : new_user_session_path %>
-    <%= link_to "カウンセリングを始める", path, 
+    <%= link_to "カウンセリングを始める", path,
         class: "block w-full text-center bg-blue-500 text-white font-semibold py-3 rounded hover:bg-blue-600" %>
   <% end %>
   <%# Salonがログインしているか、誰もログインしていない場合に表示 %>

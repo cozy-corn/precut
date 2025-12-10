@@ -54,7 +54,7 @@ ja:
     models:
       user:
         other: ユーザー
-      salon: 
+      salon:
         other: サロン
   devise:
     confirmations:
