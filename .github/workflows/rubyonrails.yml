@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11-alpine
+        image: postgres:15-alpine
         ports:
           - "5432:5432"
         env:
@@ -51,6 +51,15 @@ jobs:
         run: |
           echo "Waiting for PostgreSQL to be ready..."
           pg_isready -h localhost -p 5432 -U postgres || (sleep 10 && pg_isready -h localhost -p 5432 -U postgres)
+
+      - name: Install libvips
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libvips-dev
+
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
+
 
       - name: Prepare database
         run: |
