@@ -16,7 +16,6 @@ module Myapp
       g.helper false # helperファイルは基本不要
       g.assets false # Sprocketsアセット不要
       g.stylesheets false # 個別CSS不要（Tailwind使用時）
-      g.test_framework nil # 今はテスト書かないからnil
     end
     # 設定の記述はここまでです。
     # Please, add to the `ignore` list any other `lib` subdirectories that do
