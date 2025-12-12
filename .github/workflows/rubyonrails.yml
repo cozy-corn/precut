@@ -40,33 +40,29 @@ jobs:
 
       - name: Install Node dependencies
         run: npm install
-
-      - name: Build CSS assets
-        run: bin/rails assets:precompile
-
-      - name: Install PostgreSQL client
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      # システムツールのインストール
+      - name: Install All System Tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            google-chrome-stable \
+            postgresql-client \
+            libvips-dev \
+            curl libjemalloc2
       # データベースの準備
       - name: Wait for PostgreSQL
         run: |
           echo "Waiting for PostgreSQL to be ready..."
           pg_isready -h localhost -p 5432 -U postgres || (sleep 10 && pg_isready -h localhost -p 5432 -U postgres)
 
-      - name: Install libvips
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libvips-dev
-
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
-
-
       - name: Prepare database
         run: |
           bin/rails db:create
           bin/rails db:schema:load
-        
-      # Add or replace test runners here
+
+      - name: Build CSS assets
+        run: bin/rails assets:precompile
+
       - name: Run RSpec
         run: bundle exec rspec
 

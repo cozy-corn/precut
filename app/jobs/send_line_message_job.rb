@@ -2,7 +2,7 @@ class SendLineMessageJob < ApplicationJob
   queue_as :default
 
   def perform
-    # find_each を使用することで、大量ユーザーでもメモリを圧迫せずに処理できます。
+    # find_each を使用することで、大量ユーザーでもメモリを圧迫せずに処理できる
     User.find_each do |user|
       next unless user.uid.present?                   # LINE UIDがあるか確認
 
