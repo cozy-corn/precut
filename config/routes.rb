@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resource :user, only: [ :show, :edit, :update ]
   resources :events
 
+  require "sidekiq/web"
+  mount Sidekiq::Web => "/sidekiq"
   # ヘルスチェック用ルート
   get "up" => "rails/health#show", as: :rails_health_check
   # Render dynamic PWA files from app/views/pwa/*
