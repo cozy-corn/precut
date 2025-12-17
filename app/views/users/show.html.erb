@@ -11,7 +11,7 @@
       </h2>
       <div class="space-y-2 text-gray-700">
         <p><strong>氏名：</strong><%= @user.full_name %></p>
-        <p><strong>年代：</strong><%= @user.age_group %></p>
+        <p><strong>年齢：</strong><%= @user.age_group %>代</p>
       </div>
       <div class="text-center mt-4">
         <%= link_to "プロフィールを編集", edit_user_path, class: "inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" %>
