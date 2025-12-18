@@ -7,7 +7,7 @@
     </div>
     <div class="mb-4">
       <%= f.label :age_group, "年齢", class: "block font-medium mb-1" %>
-      <%= f.select :age_group, [['10歳未満', '0'], ['10代', '10'], ['20代', '20'], ['30代', '30'], ['40代', '40'], ['50代以上', '50']], { include_blank: "選択してください" }, { class: "w-full border rounded p-2"} %>
+      <%= f.select :age_group, [['10歳未満', '0'], ['10代', '10'], ['20代', '20'], ['30代', '30'], ['40代', '40'], ['50代', '50'], ['60代以上', '60']], { include_blank: "選択してください" }, { class: "w-full border rounded p-2"} %>
     </div>
     <div class="text-center">
       <%= f.submit "更新する", class: "bg-blue-500 text-white px-4 py-2 mt-6 rounded hover:bg-blue-600" %>
