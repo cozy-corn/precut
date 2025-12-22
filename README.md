@@ -1,4 +1,8 @@
-# precut
+![precut OGP]
+(app/assets/images/ogp.png)
+
+サービスURL : https://my-pre-cut.com/
+
 ## ■サービス概要
 
 ---
