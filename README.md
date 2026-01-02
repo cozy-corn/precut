@@ -1,5 +1,5 @@
-![precut OGP]
-(app/assets/images/ogp.png)
+# precut
+![precut OGP](app/assets/images/ogp.png)
 
 サービスURL : https://my-pre-cut.com/
 
@@ -62,16 +62,9 @@
 | CI | GitHub Actions |
 | バージョン管理ツール | GitHub・Git Flow |
 <br>
-* 使用技術：
-    * フロントエンド	Rails 7.2.1, @hotwired/turbo-rails"TailwindCSS
-    * バックエンド	Rails 7.2.1 (Ruby 3.2.2 )
-   
- 
-    * 開発環境	Docker
 
-
-### 画面遷移図
-Figma：https://www.figma.com/design/L2BzMTbrb7J4uoxFcSPnaG/precut?node-id=0-1&p=f&t=TbM9l7zylXfAPNEy-0
+## 画面遷移図
+Figma:https://www.figma.com/design/L2BzMTbrb7J4uoxFcSPnaG/precut?node-id=0-1&p=f&t=TbM9l7zylXfAPNEy-0
 
 ### ER図
 https://dbdiagram.io/d/precut%E6%9C%AC%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%99%82%E4%BA%88%E5%AE%9A-68ba6e7f61a46d388e91a1e9
