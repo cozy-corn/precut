@@ -52,10 +52,8 @@ module Salons
     end
 
     def autocomplete
-      @users = User.where("full_name like ?", "%#{params[:q]}%")
-      respond_to do |format|
-        format.js
-      end
+      @users = User.where("full_name LIKE ?", "%#{params[:q]}%")
+      render layout: false
     end
   end
 end
