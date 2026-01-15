@@ -6,9 +6,9 @@
   <%# ページのメインコンテンツ部分（未回答カルテ一覧の部分全体のスタート） - 固定ヘッダーの高さ分、上部に余白を設けています　ここをオートコンプリート機能を入れる予定 %>
   <main class="container mx-auto max-w-xl w-full p-0 pt-10 pb-4">
     <%# 1. 検索フォーム（独立したセクションとして集計ヘッダーの上に配置） %>
-    <div class="p-4 bg-white shadow-md border-b border-gray-100 sticky top-0 z-20">
+    <div class="p-4 bg-white shadow-md border-b border-gray-100">
       <%# _search.html.erb をここにレンダリング %>
-      <div class="text-base">
+      <div class="text-base m-8">
         <%= render 'search', q: @q, url: salons_consultations_path %>
       </div>
     </div>

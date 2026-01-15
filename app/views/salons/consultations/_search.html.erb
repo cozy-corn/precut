@@ -11,9 +11,8 @@
       placeholder: 'お客様のお名前を検索',
       value: (params[:q] && params[:q][:user_full_name_cont]),
       data: { autocomplete_target: 'input' } %>
-    <%= f.hidden_field :user_full_name, data: { autocomplete_target: 'hidden' } %>
-    <ul class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 hidden"
-        data-autocomplete-target="results"></ul>
+    <%= f.hidden_field :user_id_eq, data: { autocomplete_target: 'hidden' } %>
+    <ul class="list-group absolute w-[400px]" data-autocomplete-target="results"></ul>
   </div>
   <%# 検索ボタン %>
   <%= f.submit '検索', class: 'btn btn-primary bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition duration-150 flex-shrink-0' %>
