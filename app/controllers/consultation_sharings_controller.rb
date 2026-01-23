@@ -18,15 +18,15 @@ class ConsultationSharingsController < ApplicationController
       flash[:alert] = "共有リンクの生成に失敗しました。"
       redirect_to consultation_path(@consultation)
     end
-    rescue ActiveRecord::RecordNotFound
-      # 権限がない、またはカルテが存在しない場合
-      render plain: "対象のカルテが見つかりません。", status: :not_found
+  rescue ActiveRecord::RecordNotFound
+    # 権限がない、またはカルテが存在しない場合
+    render plain: "対象のカルテが見つかりません。", status: :not_found
   end
 
-    private
+  private
 
-    # ボタンからの送信時に、consultation_idを受け取るためのストロングパラメータ
-    def sharing_params
-      params.permit(:consultation_id)
-    end
+  # ボタンからの送信時に、consultation_idを受け取るためのストロングパラメータ
+  def sharing_params
+    params.permit(:consultation_id)
+  end
 end

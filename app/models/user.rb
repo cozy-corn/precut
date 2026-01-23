@@ -4,13 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line]
-          # フルネーム
-          validates :full_name, presence: true
-          validates :full_name, length: { in: 2..50 }
-          # email
-          validates :email, presence: true
-          # age_group
-          validates :age_group, { numericality: true }
+
+  # フルネーム
+  validates :full_name, presence: true
+  validates :full_name, length: { in: 2..50 }
+  # email
+  validates :email, presence: true
+  # age_group
+  validates :age_group, numericality: true
+
   has_many :consultations, dependent: :destroy
   has_many :events, dependent: :destroy
 
@@ -41,13 +43,6 @@ class User < ApplicationRecord
     credentials = omniauth["credentials"]
     # omniauthのinfoを取り出す
     info = omniauth["info"]
-
-    # さっき取り出したcredentialsからrefresh_tokenを取り出す
-    access_token = credentials["refresh_token"]
-    # さっき取り出したcredentialsからsecretを取り出す
-    access_secret = credentials["secret"]
-    # 最後にcredentialsをjson化しておく
-    credentials = credentials.to_json
     # さっき取り出したinfoからnameを取り出す(LINEが返してくるLINEのユーザー名)
     self.full_name = info["name"]
   end

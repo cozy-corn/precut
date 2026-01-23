@@ -52,7 +52,7 @@ module Salons
     end
 
     def autocomplete
-      @users = User.where("full_name LIKE ?", "%#{params[:q]}%")
+      @users = User.where("full_name LIKE ?", User.sanitize_sql_like(params[:q]) + "%")
       render layout: false
     end
   end
