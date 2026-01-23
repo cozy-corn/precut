@@ -1,8 +1,10 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-    # Step 1: 質問リストを読み込む
-    include QuestionList
-    QUESTIONS = QuestionList::QUESTIONS
+
+  # Step 1: 質問リストを読み込む
+  include QuestionList
+  QUESTIONS = QuestionList::QUESTIONS
+
   def new
     # ① 継続中のカウンセリングセッションを取得または開始
     # セッションにIDがあれば既存のものを使い、なければ新しく作成する
@@ -58,12 +60,12 @@ class AnswersController < ApplicationController
       @answers = @consultation.answers.order(:created_at)
       render :new, status: :unprocessable_entity
     end
-   end
+  end
 
-    private
+  private
 
-      def answer_params
-        # フォームから送られるパラメータを許可する
-        params.require(:answer).permit(:question, :answer, :consultation_id)
-      end
+  def answer_params
+    # フォームから送られるパラメータを許可する
+    params.require(:answer).permit(:question, :answer, :consultation_id)
+  end
 end
