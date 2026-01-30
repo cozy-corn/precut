@@ -59,8 +59,8 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
           # 送信した回答が表示されていることを確認
           expect(page).to have_content(answer)
         else
-          # カルテページに遷移することを確認
-          expect(page).to have_current_path(consultation_path)
+          # カルテページに遷移することを確認（URLは /consultations/UUID の形式）
+          expect(page).to have_current_path(%r{/consultations/[0-9a-f-]+})
           expect(page).to have_content("カウンセリングが完了しました！")
         end
       end
