@@ -52,8 +52,8 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
         end
 
         if index > 0
-          # 前回の質問と回答が表示されていることを確認
-          expect(page.find('.justify-end')).to have_content(answer)
+          # 今送信した回答が表示されていることを確認（Capybaraの自動待機を利用）
+          expect(page).to have_selector('.justify-end', text: answer)
         end
 
         if index < QUESTIONS.size - 1
