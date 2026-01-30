@@ -24,7 +24,19 @@ RSpec.configure do |config|
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
+  # システムテスト以外はトランザクションを使用
   config.use_transactional_fixtures = true
+
+  # システムテストではトランザクションを無効化（ブラウザとDBの接続を共有するため）
+  config.before(:each, type: :system) do
+    self.use_transactional_tests = false
+  end
+
+  config.after(:each, type: :system) do
+    # テスト後にデータをクリーンアップ
+    Consultation.destroy_all
+    User.destroy_all
+  end
   config.filter_rails_from_backtrace!
   # Deviseのテストヘルパーを読み込む
   config.include Devise::Test::IntegrationHelpers, type: :system
