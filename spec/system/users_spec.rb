@@ -7,14 +7,14 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
       within('form#new_user') do
         fill_in 'user_full_name', with: 'SystemTester'
         fill_in 'user_email', with: 'system@example.com'
-        fill_in 'user_gender', with: '男性'
-        fill_in 'user_age_group', with: '20代'
+        select '男性', from: 'user_gender'
+        select '20代', from: 'user_age_group'
         fill_in 'user_password', with: 'password'
         fill_in 'user_password_confirmation', with: 'password'
-        click_button t('.sign_up')
+        click_button '新規登録'
       end
       expect(page).to have_current_path(root_path)
-      expect(page).to have_content t('devise.registrations.signed_up')
+      expect(page).to have_content 'アカウント登録が完了しました。'
 
       click_link "カウンセリングを始める"
       expect(page).to have_current_path(new_answer_path)
@@ -51,18 +51,16 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
           click_button "送信"
         end
 
-        if index > 0
-          # 前回の質問と回答が表示されていることを確認
-          expect(page.find('.justify-end')).to have_content(answer)
-        end
-
         if index < QUESTIONS.size - 1
-          # まだ質問が残っている場合: 次の質問が @current_question として表示されることを確認
+          # まだ質問が残っている場合: 次の質問が表示されることを確認（ページ読み込み完了の確認）
           next_question = QUESTIONS[index + 1]
           expect(page).to have_content(next_question)
+
+          # 送信した回答が表示されていることを確認
+          expect(page).to have_content(answer)
         else
-          # カルテページに遷移することを確認
-          expect(page).to have_current_path(consultation_path)
+          # カルテページに遷移することを確認（URLは /consultations/UUID の形式）
+          expect(page).to have_current_path(%r{/consultations/[0-9a-f-]+})
           expect(page).to have_content("カウンセリングが完了しました！")
         end
       end

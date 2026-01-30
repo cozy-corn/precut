@@ -59,7 +59,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  gem "webdrivers"
   gem "shoulda-matchers"
   gem "database_cleaner-active_record"
   gem "simplecov", require: false
@@ -72,7 +71,6 @@ gem "devise"
 gem "devise-i18n"
 gem "rqrcode"
 gem "rails-i18n"
-# gem "importmap-rails"
 gem "ransack"
 gem "dotenv-rails"
 gem "letter_opener_web", "~> 2.0"
