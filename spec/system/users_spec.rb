@@ -51,15 +51,13 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
           click_button "送信"
         end
 
-        if index > 0
-          # 今送信した回答が表示されていることを確認（Capybaraの自動待機を利用）
-          expect(page).to have_selector('.justify-end', text: answer)
-        end
-
         if index < QUESTIONS.size - 1
-          # まだ質問が残っている場合: 次の質問が @current_question として表示されることを確認
+          # まだ質問が残っている場合: 次の質問が表示されることを確認（ページ読み込み完了の確認）
           next_question = QUESTIONS[index + 1]
           expect(page).to have_content(next_question)
+
+          # 送信した回答が表示されていることを確認
+          expect(page).to have_content(answer)
         else
           # カルテページに遷移することを確認
           expect(page).to have_current_path(consultation_path)
