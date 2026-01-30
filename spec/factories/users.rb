@@ -7,5 +7,6 @@ FactoryBot.define do
     email { |n| "test#{n}@example.com" }
     password { "password" }
     password_confirmation { "password" }
+    age_group { 20 }
   end
 end
