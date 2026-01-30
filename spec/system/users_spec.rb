@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
-  include ActionView::Helpers::TranslationHelper
-
   it '新規登録 → ホームページ → カウンセリングを始める → カルテを作成  ができる' do
       # 新規登録
       visit new_user_registration_path
@@ -13,10 +11,10 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
         select '20代', from: 'user_age_group'
         fill_in 'user_password', with: 'password'
         fill_in 'user_password_confirmation', with: 'password'
-        click_button t('.sign_up')
+        click_button '新規登録'
       end
       expect(page).to have_current_path(root_path)
-      expect(page).to have_content t('devise.registrations.signed_up')
+      expect(page).to have_content 'アカウント登録が完了しました。'
 
       click_link "カウンセリングを始める"
       expect(page).to have_current_path(new_answer_path)
