@@ -7,8 +7,8 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
       within('form#new_user') do
         fill_in 'user_full_name', with: 'SystemTester'
         fill_in 'user_email', with: 'system@example.com'
-        fill_in 'user_gender', with: '男性'
-        fill_in 'user_age_group', with: '20代'
+        select '男性', from: 'user_gender'
+        select '20代', from: 'user_age_group'
         fill_in 'user_password', with: 'password'
         fill_in 'user_password_confirmation', with: 'password'
         click_button t('.sign_up')
