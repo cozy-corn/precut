@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
+  include ActionView::Helpers::TranslationHelper
+
   it '新規登録 → ホームページ → カウンセリングを始める → カルテを作成  ができる' do
       # 新規登録
       visit new_user_registration_path
