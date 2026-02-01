@@ -33,9 +33,13 @@ RSpec.configure do |config|
   end
 
   config.after(:each, type: :system) do
-    # テスト後にデータをクリーンアップ
+    # テスト後にデータをクリーンアップ（外部キー制約の順序を考慮）
+    ConsultationSharing.destroy_all
+    Answer.destroy_all
+    Event.destroy_all
     Consultation.destroy_all
     User.destroy_all
+    Salon.destroy_all
   end
   config.filter_rails_from_backtrace!
   # Deviseのテストヘルパーを読み込む
