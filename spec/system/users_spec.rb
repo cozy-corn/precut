@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
+  # Turbo/JavaScriptを動かすためにブラウザを使う
+  before do
+    driven_by :selenium_chrome_headless
+  end
+
   it '新規登録 → ホームページ → カウンセリングを始める → カルテを作成  ができる' do
       # 新規登録
       visit new_user_registration_path
@@ -52,9 +57,12 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
         end
 
         if index < QUESTIONS.size - 1
-          # まだ質問が残っている場合: 次の質問が表示されることを確認（ページ読み込み完了の確認）
+          # まだ質問が残っている場合
           next_question = QUESTIONS[index + 1]
-          expect(page).to have_content(next_question)
+
+          # 次の質問が表示されることを確認（Turbo/AJAX完了を待機）
+          # ※チャット形式なので前の質問は履歴として残る
+          expect(page).to have_content(next_question, wait: 5)
 
           # 送信した回答が表示されていることを確認
           expect(page).to have_content(answer)
