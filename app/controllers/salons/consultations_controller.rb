@@ -26,7 +26,7 @@ module Salons
         redirect_to salons_consultations_path, alert: "アクセス権限がありません。"
       end
       # ※ N+1問題対策: 全回答データをここで一括で読み込む
-      @answers = @consultation.answers.includes(:consultation).order(created_at: :asc)
+      @answers = @consultation.answers.order(created_at: :asc)
     end
 
     def update
@@ -52,7 +52,9 @@ module Salons
     end
 
     def autocomplete
-      @users = User.where("full_name LIKE ?", User.sanitize_sql_like(params[:q]) + "%")
+      @users = User.joins(:consultations)
+                   .where(consultations: { salon_id: current_salon.id })
+                   .where("users.full_name LIKE ?", User.sanitize_sql_like(params[:q]) + "%")
       render layout: false
     end
   end
