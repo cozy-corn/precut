@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
+  # Turbo/JavaScriptを動かすためにブラウザを使う
+  before do
+    driven_by :selenium_chrome_headless
+  end
+
   it '新規登録 → ホームページ → カウンセリングを始める → カルテを作成  ができる' do
       # 新規登録
       visit new_user_registration_path
@@ -52,16 +57,16 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
         end
 
         if index < QUESTIONS.size - 1
-          # まだ質問が残っている場合: 次の質問が表示されることを確認
+          # まだ質問が残っている場合
           next_question = QUESTIONS[index + 1]
 
-          # Turbo Driveの非同期遷移完了を待つ（現在の質問が消えるのを確認）
-          expect(page).not_to have_content(question, wait: 3)
+          # 1. まず次の質問が表示されるのを待つ（Turbo/AJAX完了を待機）
+          expect(page).to have_content(next_question, wait: 5)
 
-          # 次の質問が表示されることを確認
-          expect(page).to have_content(next_question)
+          # 2. 前の質問が消えたことを確認
+          expect(page).to have_no_content(question)
 
-          # 送信した回答が表示されていることを確認
+          # 3. 送信した回答が表示されていることを確認
           expect(page).to have_content(answer)
         else
           # カルテページに遷移することを確認（URLは /consultations/UUID の形式）
