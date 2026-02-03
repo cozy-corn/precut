@@ -60,13 +60,11 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
           # まだ質問が残っている場合
           next_question = QUESTIONS[index + 1]
 
-          # 1. まず次の質問が表示されるのを待つ（Turbo/AJAX完了を待機）
+          # 次の質問が表示されることを確認（Turbo/AJAX完了を待機）
+          # ※チャット形式なので前の質問は履歴として残る
           expect(page).to have_content(next_question, wait: 5)
 
-          # 2. 前の質問が消えたことを確認
-          expect(page).to have_no_content(question)
-
-          # 3. 送信した回答が表示されていることを確認
+          # 送信した回答が表示されていることを確認
           expect(page).to have_content(answer)
         else
           # カルテページに遷移することを確認（URLは /consultations/UUID の形式）
