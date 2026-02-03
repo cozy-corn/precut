@@ -56,7 +56,7 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
           next_question = QUESTIONS[index + 1]
 
           # Turbo Driveの非同期遷移完了を待つ（現在の質問が消えるのを確認）
-          expect(page).not_to have_content(question)
+          expect(page).not_to have_content(question, wait: 3)
 
           # 次の質問が表示されることを確認
           expect(page).to have_content(next_question)
