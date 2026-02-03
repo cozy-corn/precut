@@ -58,17 +58,20 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
 
         if index < QUESTIONS.size - 1
           # まだ質問が残っている場合
-          next_question = QUESTIONS[index + 1]
+          next_question_number = index + 2  # 次の質問番号（1始まり）
 
-          # 次の質問が表示されることを確認（Turbo/AJAX完了を待機）
-          # ※チャット形式なので前の質問は履歴として残る
-          expect(page).to have_content(next_question, wait: 5)
+          # プログレスバーが進むのを待つ（ページ遷移完了の確認）
+          expect(page).to have_content("質問 #{next_question_number} / 8", wait: 10)
+
+          # 次の質問が表示されることを確認
+          next_question = QUESTIONS[index + 1]
+          expect(page).to have_content(next_question)
 
           # 送信した回答が表示されていることを確認
           expect(page).to have_content(answer)
         else
           # カルテページに遷移することを確認（URLは /consultations/UUID の形式）
-          expect(page).to have_current_path(%r{/consultations/[0-9a-f-]+})
+          expect(page).to have_current_path(%r{/consultations/[0-9a-f-]+}, wait: 10)
           expect(page).to have_content("カウンセリングが完了しました！")
         end
       end
