@@ -75,7 +75,7 @@
 ## 美容師向け機能
 | カルテ一覧・検索 |
 | :---: | 
-| ![seach](app/assets/images/gif) |
+| ![seach](app/assets/images/seach.gif) |
 | <p align="left">過去の顧客カルテを全て表示、確認することができます。<br>また、ユーザー名での検索で絞ることも可能です。 </p> |
 <br>
 

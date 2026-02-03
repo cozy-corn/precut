@@ -52,8 +52,13 @@ RSpec.describe "ユーザー登録からカルテ作成まで", type: :system do
         end
 
         if index < QUESTIONS.size - 1
-          # まだ質問が残っている場合: 次の質問が表示されることを確認（ページ読み込み完了の確認）
+          # まだ質問が残っている場合: 次の質問が表示されることを確認
           next_question = QUESTIONS[index + 1]
+
+          # Turbo Driveの非同期遷移完了を待つ（現在の質問が消えるのを確認）
+          expect(page).not_to have_content(question)
+
+          # 次の質問が表示されることを確認
           expect(page).to have_content(next_question)
 
           # 送信した回答が表示されていることを確認
