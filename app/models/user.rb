@@ -30,11 +30,6 @@ class User < ApplicationRecord
     [ "user" ] # Userモデルを関連付けとして検索することを許可
   end
 
-  # social_profilesの中身を順番に取り出して、指定したproviderと一致する最初のsocial_profileを返す
-  def social_profile(provider)
-    social_profiles.select { |sp| sp.provider == provider.to_s }.first
-  end
-
   # omniauthから受け取った情報で、インスタンスの属性を設定する。
   def set_values(omniauth)
     # omniauthのproviderとuidのどちらかが既存の値と異なる場合、この時点でreturnしてメソッドを終了する。
@@ -45,11 +40,5 @@ class User < ApplicationRecord
     info = omniauth["info"]
     # さっき取り出したinfoからnameを取り出す(LINEが返してくるLINEのユーザー名)
     self.full_name = info["name"]
-  end
-
-  # 引数で受け取ったraw_infoをjson化してインスタンスのraw_infoに格納する
-  def set_values_by_raw_info(raw_info)
-    self.raw_info = raw_info.to_json
-    self.save!
   end
 end
