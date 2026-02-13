@@ -10,12 +10,37 @@
     @apply mx-auto px-4 pt-10 pb-10 sm:px-6 lg:px-8 max-w-screen-md;
   }
 }
-/*
 
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  .card-body {
+    @apply text-gray-800 leading-relaxed space-y-3;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold text-gray-800 mb-4 pb-2 border-b-2;
+  }
+
+  .form-label {
+    @apply block text-gray-700 font-medium mb-1;
+  }
+
+  .subsection-title {
+    @apply text-xl font-semibold mb-3;
+  }
+
+  .list-styled {
+    @apply list-disc list-inside ml-4 space-y-2;
+  }
+
+  .card-blue {
+    @apply p-6 border-t-4 border-blue-500 rounded-lg shadow-xl;
+  }
+
+  .card-green {
+    @apply p-6 border-t-4 border-green-500 rounded-lg shadow-xl;
+  }
+
+  .modal-card {
+    @apply bg-white p-8 rounded-lg shadow-lg w-96 max-w-sm;
   }
 }
-
-*/
