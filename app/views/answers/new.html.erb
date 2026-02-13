@@ -32,7 +32,6 @@
         </div>
       </div>
     <% end %>
-  </div>
   <% if @current_question.present? %>
     <!-- model: @answer: formの入力内容を@answerというオブジェクトに紐づけし、url: answers_path: フォームの送信先をAnswersControllerのcreate -->
     <%= form_with model: @answer, url: answers_path, local: true, class: "flex items-center w-full bg-white p-2 border-t border-gray-300" do |form| %>
