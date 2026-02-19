@@ -4,6 +4,9 @@ Capybara.register_driver :headless_chrome do |app|
   # CIではChromiumのパスを指定（ローカルではChromeを自動検出）
   if ENV['CI']
     options.binary = '/usr/bin/google-chrome-stable'
+  elsif File.exist?('/usr/bin/chromium')
+    # Docker環境（Chromiumがインストールされている）
+    options.binary = '/usr/bin/chromium'
   end
 
   options.add_argument('--headless=new')

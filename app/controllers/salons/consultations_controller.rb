@@ -4,8 +4,11 @@ module Salons
     # ログイン中のSalon（美容師）のみアクセスを許可する
     # Deviseによって自動生成されるヘルパーメソッド
     before_action :authenticate_salon!
+    before_action :set_consultation, only: [ :show, :update ]
+    before_action :authorize_consultation!, only: [ :show, :update ]
     # layouts/salon_application.html.erb を使用するよう指定
     layout "salon_application"
+
     # GET /salons/consultations (美容師モードのホーム/カルテ一覧)
     def index
       @total_consultations_count = current_salon.consultations.count
@@ -13,30 +16,16 @@ module Salons
       # ログイン中の美容師に紐づくConsultationを全て取得し、作成日時の降順で並べる
       @q = current_salon.consultations.ransack(params[:q])
       @consultations = @q.result(distinct: true)
-                   .includes(:answers, :user)
-                   .order(created_at: :desc)
+                         .includes(:answers, :user)
+                         .order(created_at: :desc)
     end
 
     def show
-      # URLから渡されたIDでカルテを検索
-      @consultation = Consultation.find_by!(uuid_url: params[:id])
-      # セキュリティチェック
-      # 取得したカルテが、現在ログイン中の美容室に紐づいているか確認
-      unless @consultation.salon == current_salon
-        redirect_to salons_consultations_path, alert: "アクセス権限がありません。"
-      end
       # ※ N+1問題対策: 全回答データをここで一括で読み込む
       @answers = @consultation.answers.order(created_at: :asc)
     end
 
     def update
-      @consultation = Consultation.find_by!(uuid_url: params[:id])
-
-      # セキュリティチェック: 紐づきがない場合は処理しない
-      unless @consultation.salon == current_salon
-        return redirect_to salons_consultations_path, alert: "不正な操作が検出されました。"
-      end
-
       # ステータスを 'archived' に更新
       if @consultation.update(status: "archived")
         # 成功したら詳細ページに戻り、成功メッセージを表示
@@ -55,7 +44,23 @@ module Salons
       @users = User.joins(:consultations)
                    .where(consultations: { salon_id: current_salon.id })
                    .where("users.full_name LIKE ?", User.sanitize_sql_like(params[:q]) + "%")
+                   .distinct
       render layout: false
+    end
+
+    private
+
+    # URLから渡されたIDでカルテを検索
+    def set_consultation
+      @consultation = Consultation.find_by!(uuid_url: params[:id])
+    end
+
+    # セキュリティチェック
+    # 取得したカルテが、現在ログイン中の美容室に紐づいているか確認
+    def authorize_consultation!
+      unless @consultation.salon == current_salon
+        redirect_to salons_consultations_path, alert: "アクセス権限がありません。"
+      end
     end
   end
 end
