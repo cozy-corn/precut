@@ -1,13 +1,13 @@
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  # @user = User.find(params[:id]) のように、対象のユーザーをデータベースから取り出す小さなメソッド
+  # ログイン中のユーザーを @user にセットするメソッド
   before_action :set_user, only: [ :show, :edit, :update ]
   before_action :authorize_user!, only: [ :edit, :update ]
 
   def show
     # @user は set_user でセット済み
-    @events = set_user.events.order(start_time: :asc)
+    @events = @user.events.order(start_time: :asc)
     # 画面に表示する月の初日を取得（パラメータがなければ当日）
     @start_date = params.fetch(:start_date, Date.today).to_date
   end

@@ -11,7 +11,6 @@ class ConsultationSharingsController < ApplicationController
     if @sharing.save
       # 3. 成功したら、Turboでビューを更新するためのレスポンスを返す
       #    （ボタンがQRコードに置き換わる）
-      #    render 'consultations/replace_sharing_widget'は後で作成します
       render turbo_stream: turbo_stream.replace("sharing_widget", partial: "consultations/sharing_widget", locals: { consultation: @consultation })
     else
       # エラー時の処理
@@ -21,12 +20,5 @@ class ConsultationSharingsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     # 権限がない、またはカルテが存在しない場合
     render plain: "対象のカルテが見つかりません。", status: :not_found
-  end
-
-  private
-
-  # ボタンからの送信時に、consultation_idを受け取るためのストロングパラメータ
-  def sharing_params
-    params.permit(:consultation_id)
   end
 end
