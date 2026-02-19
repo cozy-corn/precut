@@ -4,8 +4,8 @@ module Salons
     # ログイン中のSalon（美容師）のみアクセスを許可する
     # Deviseによって自動生成されるヘルパーメソッド
     before_action :authenticate_salon!
-    before_action :set_consultation, only: [:show, :update]
-    before_action :authorize_consultation!, only: [:show, :update]
+    before_action :set_consultation, only: [ :show, :update ]
+    before_action :authorize_consultation!, only: [ :show, :update ]
     # layouts/salon_application.html.erb を使用するよう指定
     layout "salon_application"
 
