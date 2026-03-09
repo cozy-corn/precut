@@ -60,10 +60,10 @@ class ConsultationsController < ApplicationController
     ActiveRecord::Base.transaction do
       @consultation = current_user.consultations.create!(status: :draft)
 
-      answers_params.each do |a|
+      answers_params.each do |answer_param|
         @consultation.answers.create!(
-          question: a[:question],
-          answer: a[:answer]
+          question: answer_param[:question],
+          answer: answer_param[:answer]
         )
       end
     end
