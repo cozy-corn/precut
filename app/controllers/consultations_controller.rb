@@ -20,7 +20,7 @@ class ConsultationsController < ApplicationController
     # 4. カルテに紐づく回答を取得
     @answers = @consultation.answers.order(created_at: :asc)
 
-    # 5. ログインしているサロンがいる場合、初回アクセス時のみ紐づける
+    # 5. サロンとの紐付け(初回のみログインしてしているサロンとカルテと紐付け)
     if current_salon && @consultation.salon_id.nil?
       @consultation.update!(salon_id: current_salon.id)
     end
